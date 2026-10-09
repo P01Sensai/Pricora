@@ -3,6 +3,8 @@
 import { useEffect, useState, useRef, use, Suspense } from "react";
 import Link from "next/link";
 import type { Product, StoreListing, PriceHistory } from "@/lib/types";
+import PriceHistoryChart from "@/components/PriceHistoryChart";
+import { calculateDealScore } from "@/lib/deal-score";
 
 function formatPrice(paise: number): string {
   return "₹" + (paise / 100).toLocaleString("en-IN", { maximumFractionDigits: 0 });
@@ -10,119 +12,6 @@ function formatPrice(paise: number): string {
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
-}
-
-// ─── Mini Chart (pure canvas, no dependency) ───
-function PriceChart({ listings }: { listings: StoreListing[] }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const container = containerRef.current;
-    if (!canvas || !container) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const rect = container.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    const W = rect.width;
-    const H = rect.height;
-
-    // Gather all price points with their store colors
-    const COLORS = ["#3fe3ff", "#f59e0b", "#a855f7"];
-    const allPrices: number[] = [];
-
-    const seriesData = listings.map((l, idx) => {
-      const history = l.price_history ?? [];
-      history.forEach((h) => allPrices.push(h.price));
-      return { history, color: COLORS[idx % COLORS.length], name: l.store?.name ?? "Store" };
-    });
-
-    if (allPrices.length === 0) return;
-
-    const minP = Math.min(...allPrices) * 0.97;
-    const maxP = Math.max(...allPrices) * 1.03;
-    const range = maxP - minP || 1;
-
-    // Background grid
-    ctx.strokeStyle = "rgba(255,255,255,.04)";
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = 24 + ((H - 48) * i) / 4;
-      ctx.beginPath();
-      ctx.moveTo(40, y);
-      ctx.lineTo(W - 16, y);
-      ctx.stroke();
-
-      ctx.fillStyle = "rgba(255,255,255,.25)";
-      ctx.font = "9px system-ui";
-      ctx.textAlign = "right";
-      const val = maxP - (range * i) / 4;
-      ctx.fillText(formatPrice(val), 36, y + 3);
-    }
-
-    // Draw each store's line
-    seriesData.forEach(({ history, color }) => {
-      if (history.length < 2) return;
-      const sorted = [...history].sort((a, b) => new Date(a.recorded_at).getTime() - new Date(b.recorded_at).getTime());
-      const tMin = new Date(sorted[0].recorded_at).getTime();
-      const tMax = new Date(sorted[sorted.length - 1].recorded_at).getTime();
-      const tRange = tMax - tMin || 1;
-
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-      ctx.lineJoin = "round";
-      ctx.beginPath();
-
-      sorted.forEach((pt, i) => {
-        const x = 44 + ((new Date(pt.recorded_at).getTime() - tMin) / tRange) * (W - 64);
-        const y = 24 + ((maxP - pt.price) / range) * (H - 48);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.stroke();
-
-      // Glow
-      ctx.save();
-      ctx.globalAlpha = 0.08;
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 8;
-      ctx.filter = "blur(6px)";
-      ctx.beginPath();
-      sorted.forEach((pt, i) => {
-        const x = 44 + ((new Date(pt.recorded_at).getTime() - tMin) / tRange) * (W - 64);
-        const y = 24 + ((maxP - pt.price) / range) * (H - 48);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.stroke();
-      ctx.restore();
-    });
-
-    // Legend
-    seriesData.forEach(({ color, name }, i) => {
-      const lx = 44 + i * 120;
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(lx, H - 8, 3, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,.6)";
-      ctx.font = "10px system-ui";
-      ctx.textAlign = "left";
-      ctx.fillText(name, lx + 8, H - 5);
-    });
-  }, [listings]);
-
-  return (
-    <div ref={containerRef} className="w-full h-64 relative">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
-    </div>
-  );
 }
 
 // ─── Store Comparison Row ───
@@ -224,6 +113,8 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
   const mrp = listings[0]?.mrp;
   const discount = mrp && bestListing?.current_price
     ? Math.round((1 - bestListing.current_price / mrp) * 100) : 0;
+  
+  const dealScore = calculateDealScore(listings);
 
   return (
     <div className="min-h-screen bg-[#020204] text-white font-[Poppins,Inter,system-ui,sans-serif]">
@@ -301,6 +192,22 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
               </div>
             </div>
 
+            {/* Deal Score */}
+            {dealScore && (
+              <div className="rounded-2xl bg-gradient-to-br from-white/[.05] to-transparent border border-white/[.07] p-6 mb-8">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-white/70 uppercase tracking-widest mb-1">Pricora Verdict</p>
+                    <p className="text-3xl font-[900] text-white">{dealScore.verdict}</p>
+                    <p className="text-xs text-white/40 mt-1">Score: {dealScore.score}/100 · Analyzed across {listings.length} stores</p>
+                  </div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center border-4" style={{ borderColor: dealScore.score >= 80 ? '#22c55e' : dealScore.score >= 60 ? '#3fe3ff' : dealScore.score >= 40 ? '#f59e0b' : '#ef4444' }}>
+                    <span className="text-2xl font-bold" style={{ color: dealScore.score >= 80 ? '#22c55e' : dealScore.score >= 60 ? '#3fe3ff' : dealScore.score >= 40 ? '#f59e0b' : '#ef4444' }}>{dealScore.score}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {/* Price Comparison */}
             <div>
               <h2 className="text-sm font-semibold text-white/70 tracking-wide uppercase mb-3 flex items-center gap-2">
@@ -325,13 +232,26 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
                 60-Day Price History
               </h2>
               <div className="rounded-2xl bg-white/[.025] border border-white/[.07] p-5 overflow-hidden">
-                <PriceChart listings={listings} />
+                <PriceHistoryChart listings={listings} />
               </div>
             </div>
           </div>
 
           {/* ─── Right Sidebar ─── */}
           <div className="space-y-5">
+            {/* Price Alert */}
+            <div className="rounded-2xl bg-white/[.025] border border-cyan-400/30 p-5 shadow-[0_0_20px_rgba(63,227,255,0.05)]">
+              <h3 className="text-sm font-semibold text-white/90 tracking-wide mb-2 flex items-center gap-2">
+                <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                Price Drop Alerts
+              </h3>
+              <p className="text-xs text-white/50 mb-4">We'll email you when the price drops below {bestListing?.current_price ? formatPrice(bestListing.current_price) : "current price"}.</p>
+              <form className="flex gap-2">
+                <input type="email" placeholder="Your email..." className="flex-1 w-0 h-9 rounded-lg bg-white/[.05] border border-white/[.1] text-xs px-3 outline-none focus:border-cyan-400/50" required />
+                <button className="h-9 px-4 rounded-lg bg-cyan-400 text-black text-xs font-semibold hover:bg-cyan-300 transition shrink-0">Notify</button>
+              </form>
+            </div>
+
             {/* Specs */}
             {product.specs && Object.keys(product.specs).length > 0 && (
               <div className="rounded-2xl bg-white/[.025] border border-white/[.07] p-5">
