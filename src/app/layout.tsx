@@ -29,15 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${poppins.variable} ${playfair.variable} h-full antialiased font-sans intro`}
+      className={`${inter.variable} ${poppins.variable} ${playfair.variable} h-full antialiased font-sans dark`}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `setTimeout(function(){document.documentElement.classList.remove('intro');},4000);`,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

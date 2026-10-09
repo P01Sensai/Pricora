@@ -16,11 +16,6 @@ function SearchResultsContent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!query || query.length < 2) {
-      setProducts([]);
-      setLoading(false);
-      return;
-    }
     setLoading(true);
     fetch(`/api/search?q=${encodeURIComponent(query)}`)
       .then((r) => r.json())
@@ -57,7 +52,7 @@ function SearchResultsContent() {
               <input
                 name="q"
                 defaultValue={query}
-                placeholder="Search headphones, speakers, earbuds…"
+                placeholder="Search for any product…"
                 className="w-full h-10 pl-10 pr-4 rounded-xl bg-white/[.06] border border-white/[.08] text-sm text-white placeholder:text-white/40 outline-none focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-400/20 transition"
               />
             </div>
@@ -84,9 +79,9 @@ function SearchResultsContent() {
 
         {!loading && products.length === 0 && query && (
           <div className="text-center py-20">
-            <div className="text-4xl mb-4">🔇</div>
+            <div className="text-4xl mb-4">🛒</div>
             <p className="text-white/60 text-lg mb-2">No products found</p>
-            <p className="text-white/30 text-sm">Try searching for &quot;headphones&quot;, &quot;JBL&quot;, or &quot;Sony&quot;</p>
+            <p className="text-white/30 text-sm">Try searching for &quot;iPhone&quot;, &quot;Samsung&quot;, or &quot;MacBook&quot;</p>
           </div>
         )}
 
@@ -157,24 +152,7 @@ function SearchResultsContent() {
           </div>
         )}
 
-        {!query && (
-          <div className="text-center py-20">
-            <div className="text-5xl mb-5">🎵</div>
-            <p className="text-white/60 text-lg mb-2">Find the best audio deals</p>
-            <p className="text-white/30 text-sm mb-8">Compare prices across Amazon, Flipkart, and Croma</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {["Sony WH-1000XM5", "JBL Flip 6", "Samsung Buds", "Bose"].map((t) => (
-                <Link
-                  key={t}
-                  href={`/search?q=${encodeURIComponent(t)}`}
-                  className="px-4 py-2 rounded-xl bg-white/[.04] border border-white/[.08] text-sm text-white/60 hover:text-white hover:border-cyan-400/30 transition"
-                >
-                  {t}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Empty state when query yields no results */}
       </main>
     </div>
   );
