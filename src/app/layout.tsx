@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,7 +9,14 @@ const inter = Inter({
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: ["600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  weight: ["600"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
@@ -22,8 +29,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${poppins.variable} h-full antialiased font-sans`}
+      className={`${inter.variable} ${poppins.variable} ${playfair.variable} h-full antialiased font-sans intro`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `setTimeout(function(){document.documentElement.classList.remove('intro');},4000);`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
