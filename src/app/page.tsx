@@ -106,14 +106,17 @@ export default function HomePage() {
             <span className="font-black text-lg tracking-tight">PRICORA</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
-            <Link href="/search?q=electronics" className="hover:text-white transition">Electronics</Link>
-            <Link href="/search?q=appliances" className="hover:text-white transition">Appliances</Link>
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-white/70">
+            <Link href="/search?q=festive" className="text-amber-300 hover:text-amber-200 transition font-semibold">Festive Deals 🪔</Link>
+            <Link href="/search?q=smartphones" className="hover:text-white transition">Smartphones</Link>
+            <Link href="/search?q=laptops" className="hover:text-white transition">Laptops</Link>
+            <Link href="/search?q=audio" className="hover:text-white transition">Audio</Link>
             <Link href="/search?q=gaming" className="hover:text-white transition">Gaming</Link>
+            <Link href="/search?q=appliances" className="hover:text-white transition">Appliances</Link>
           </div>
 
           <Link href="/search" className="px-5 py-2 rounded-xl bg-gradient-to-t from-[#006180] to-[#3ec8e4] text-white text-sm font-semibold shadow-[0_0_15px_rgba(63,227,255,0.2)] hover:brightness-110 transition">
-            Explore Deals
+            Explore 130+ Deals
           </Link>
         </div>
       </header>
@@ -124,7 +127,7 @@ export default function HomePage() {
         {/* Glow Badge */}
         <div className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[.03] border border-white/[.1] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#3fe3ff]" />
-          <span className="text-xs font-medium text-white/90">Professionals at price tracking</span>
+          <span className="text-xs font-medium text-white/90">Live Amazon & Flipkart Scraper Engine</span>
         </div>
 
         {/* Hero Text */}
@@ -134,7 +137,7 @@ export default function HomePage() {
         </h1>
         
         <p className="text-center text-white/50 text-base md:text-lg max-w-xl mb-12">
-          Compare prices across Amazon, Flipkart, and Croma instantly. Make sure you never overpay for your next sound system again.
+          Compare real-time prices across Amazon India, Flipkart, and Croma instantly. Over 130+ verified festive deals with live web scraping.
         </p>
 
         {/* Massive Search Bar (Functional) */}
@@ -148,7 +151,7 @@ export default function HomePage() {
               name="q"
               type="text"
               required
-              placeholder="Search smartphones, laptops, appliances..."
+              placeholder="Search iPhone 17, PS5, MacBook, Sony XM5..."
               className="w-full h-full bg-transparent px-4 text-base md:text-xl text-white placeholder:text-white/30 outline-none"
             />
             <button type="submit" className="h-full px-6 md:px-10 bg-cyan-500 text-black font-bold text-sm md:text-base hover:bg-cyan-400 transition-colors">
@@ -159,9 +162,9 @@ export default function HomePage() {
 
         {/* Trending tags */}
         <div className="flex flex-wrap justify-center items-center gap-3 mt-8">
-          <span className="text-xs font-semibold text-white/30 uppercase tracking-wider">Trending:</span>
-          {["iPhone 17", "MacBook Air", "PlayStation 5"].map(t => (
-            <Link key={t} href={`/search?q=${encodeURIComponent(t)}`} className="text-xs text-white/60 hover:text-cyan-400 transition">
+          <span className="text-xs font-semibold text-white/30 uppercase tracking-wider">Trending Deals:</span>
+          {["iPhone 17 Pro", "iPhone 16", "Samsung S24 Ultra", "MacBook Air M3", "PlayStation 5", "Sony XM5", "Festive Deals"].map(t => (
+            <Link key={t} href={`/search?q=${encodeURIComponent(t)}`} className="text-xs px-2.5 py-1 rounded-lg bg-white/[.04] border border-white/[.07] text-white/70 hover:text-cyan-300 hover:border-cyan-400/40 transition">
               {t}
             </Link>
           ))}

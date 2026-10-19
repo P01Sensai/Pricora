@@ -60,7 +60,7 @@ export interface StoreListing {
   mrp: number | null;
   delivery_charge: number | null;
   in_stock: boolean;
-  match_method: "gtin" | "model" | "fuzzy" | "manual" | null;
+  match_method: "gtin" | "model" | "fuzzy" | "manual" | "live" | null;
   match_confidence: number | null;
   last_checked_at: string | null;
   created_at: string;
