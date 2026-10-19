@@ -1,10 +1,9 @@
-"use client";
-
-import { useEffect, useState, useRef, use, Suspense } from "react";
 import Link from "next/link";
-import type { Product, StoreListing, PriceHistory } from "@/lib/types";
-import PriceHistoryChart from "@/components/PriceHistoryChart";
+import { getProductBySlug } from "@/lib/data";
 import { calculateDealScore } from "@/lib/deal-score";
+import PriceHistoryChart from "@/components/PriceHistoryChart";
+import PriceAlertForm from "@/components/PriceAlertForm";
+import type { StoreListing } from "@/lib/types";
 
 function formatPrice(paise: number): string {
   return "₹" + (paise / 100).toLocaleString("en-IN", { maximumFractionDigits: 0 });
@@ -14,7 +13,6 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
 }
 
-// ─── Store Comparison Row ───
 function StoreRow({ listing, isBest }: { listing: StoreListing; isBest: boolean }) {
   const STORE_COLORS: Record<string, string> = {
     amazon: "#ff9900",
@@ -73,33 +71,19 @@ function StoreRow({ listing, isBest }: { listing: StoreListing; isBest: boolean 
   );
 }
 
-function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    import("@/lib/data").then(({ getProductBySlug }) => {
-      getProductBySlug(slug).then((p) => {
-        setProduct(p);
-        setLoading(false);
-      });
-    });
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#020204] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin" />
-      </div>
-    );
-  }
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return (
       <div className="min-h-screen bg-[#020204] text-white flex flex-col items-center justify-center gap-4">
-        <p className="text-2xl">Product not found</p>
-        <Link href="/search" className="text-cyan-400 text-sm hover:underline">← Back to search</Link>
+        <div className="text-4xl">🛒</div>
+        <p className="text-2xl font-bold">Product not found</p>
+        <p className="text-white/40 text-sm">We couldn&apos;t find this product in our live catalog.</p>
+        <Link href="/search" className="px-4 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition mt-2">
+          ← Back to Search
+        </Link>
       </div>
     );
   }
@@ -111,9 +95,10 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
     null as StoreListing | null
   );
   const mrp = listings[0]?.mrp;
-  const discount = mrp && bestListing?.current_price
-    ? Math.round((1 - bestListing.current_price / mrp) * 100) : 0;
-  
+  const discount = mrp && bestListing?.current_price && mrp > bestListing.current_price
+    ? Math.round((1 - bestListing.current_price / mrp) * 100)
+    : 0;
+
   const dealScore = calculateDealScore(listings);
 
   return (
@@ -155,7 +140,7 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
             <div className="rounded-2xl bg-white/[.025] border border-white/[.07] overflow-hidden">
               <div className="flex flex-col sm:flex-row gap-6 p-6">
                 {/* Image */}
-                <div className="shrink-0 w-full sm:w-48 h-48 rounded-xl bg-gradient-to-br from-white/[.04] to-transparent flex items-center justify-center">
+                <div className="shrink-0 w-full sm:w-48 h-48 rounded-xl bg-gradient-to-br from-white/[.04] to-transparent flex items-center justify-center p-3">
                   {product.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={product.image_url} alt={product.title} className="max-h-40 max-w-40 object-contain" />
@@ -245,11 +230,8 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
                 <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                 Price Drop Alerts
               </h3>
-              <p className="text-xs text-white/50 mb-4">We'll email you when the price drops below {bestListing?.current_price ? formatPrice(bestListing.current_price) : "current price"}.</p>
-              <form className="flex gap-2">
-                <input type="email" placeholder="Your email..." className="flex-1 w-0 h-9 rounded-lg bg-white/[.05] border border-white/[.1] text-xs px-3 outline-none focus:border-cyan-400/50" required />
-                <button className="h-9 px-4 rounded-lg bg-cyan-400 text-black text-xs font-semibold hover:bg-cyan-300 transition shrink-0">Notify</button>
-              </form>
+              <p className="text-xs text-white/50 mb-4">We&apos;ll email you when the price drops below {bestListing?.current_price ? formatPrice(bestListing.current_price) : "current price"}.</p>
+              <PriceAlertForm defaultPrice={bestListing?.current_price ? formatPrice(bestListing.current_price) : undefined} />
             </div>
 
             {/* Specs */}
@@ -302,13 +284,5 @@ function ProductPageContent({ params }: { params: Promise<{ slug: string }> }) {
         </div>
       </main>
     </div>
-  );
-}
-
-export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-[#020204] flex items-center justify-center"><div className="w-8 h-8 border-2 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin" /></div>}>
-      <ProductPageContent params={params} />
-    </Suspense>
   );
 }

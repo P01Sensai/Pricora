@@ -29,14 +29,22 @@ function SearchResultsContent() {
   const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc" | "discount">("featured");
 
   useEffect(() => {
+    let ignore = false;
     setLoading(true);
     fetch(`/api/search?q=${encodeURIComponent(rawQuery)}`)
       .then((r) => r.json())
       .then((d) => {
-        setProducts(d.products ?? []);
-        setLoading(false);
+        if (!ignore) {
+          setProducts(d.products ?? []);
+          setLoading(false);
+        }
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        if (!ignore) setLoading(false);
+      });
+    return () => {
+      ignore = true;
+    };
   }, [rawQuery]);
 
   const sortedProducts = useMemo(() => {
@@ -194,6 +202,7 @@ function SearchResultsContent() {
                 <Link
                   key={product.id}
                   href={`/product/${product.slug}`}
+                  prefetch={false}
                   className="group rounded-2xl bg-white/[.025] border border-white/[.07] overflow-hidden hover:border-cyan-400/40 hover:bg-white/[.045] transition-all duration-300 flex flex-col justify-between"
                 >
                   {/* Top Image area */}

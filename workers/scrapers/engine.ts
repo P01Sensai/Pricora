@@ -12,10 +12,19 @@ function getRandomUserAgent() {
   return USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)];
 }
 
+const SCRAPE_CACHE = new Map<string, { data: NormalizedProduct[]; timestamp: number }>();
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
 /**
  * Fast HTTP Scraper for Amazon India
  */
 export async function scrapeAmazonLive(query: string, limit = 15): Promise<NormalizedProduct[]> {
+  const cacheKey = `amz-${query.toLowerCase().trim()}-${limit}`;
+  const cached = SCRAPE_CACHE.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return cached.data;
+  }
+
   const url = `https://www.amazon.in/s?k=${encodeURIComponent(query)}`;
   try {
     const res = await fetch(url, {
@@ -23,10 +32,8 @@ export async function scrapeAmazonLive(query: string, limit = 15): Promise<Norma
         "User-Agent": getRandomUserAgent(),
         "Accept-Language": "en-IN,en-US;q=0.9,en;q=0.8",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Cache-Control": "no-cache",
-        "Pragma": "no-cache",
       },
-      next: { revalidate: 300 } // Cache in Next.js for 5 minutes
+      cache: "no-store",
     });
 
     if (!res.ok) return [];
@@ -64,6 +71,7 @@ export async function scrapeAmazonLive(query: string, limit = 15): Promise<Norma
       }
     });
 
+    SCRAPE_CACHE.set(cacheKey, { data: results, timestamp: Date.now() });
     return results;
   } catch (err) {
     console.error("[Amazon Scraper] Error:", err);
@@ -75,6 +83,12 @@ export async function scrapeAmazonLive(query: string, limit = 15): Promise<Norma
  * Fast HTTP Scraper for Flipkart
  */
 export async function scrapeFlipkartLive(query: string, limit = 15): Promise<NormalizedProduct[]> {
+  const cacheKey = `flpk-${query.toLowerCase().trim()}-${limit}`;
+  const cached = SCRAPE_CACHE.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return cached.data;
+  }
+
   const url = `https://www.flipkart.com/search?q=${encodeURIComponent(query)}`;
   try {
     const res = await fetch(url, {
@@ -83,7 +97,7 @@ export async function scrapeFlipkartLive(query: string, limit = 15): Promise<Nor
         "Accept-Language": "en-IN,en;q=0.9",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
       },
-      next: { revalidate: 300 }
+      cache: "no-store",
     });
 
     if (!res.ok) return [];
@@ -147,6 +161,7 @@ export async function scrapeFlipkartLive(query: string, limit = 15): Promise<Nor
       });
     });
 
+    SCRAPE_CACHE.set(cacheKey, { data: results, timestamp: Date.now() });
     return results;
   } catch (err) {
     console.error("[Flipkart Scraper] Error:", err);
