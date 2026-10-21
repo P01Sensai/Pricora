@@ -236,13 +236,16 @@ const CATEGORY_CARDS = [
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#030308] text-white overflow-x-hidden font-sans flex flex-col selection:bg-rose-500 selection:text-white">
+    <div className="relative min-h-screen bg-[#060713] text-white overflow-x-hidden font-sans flex flex-col selection:bg-rose-500 selection:text-white">
       
       {/* ─── Vibrant Ambient Aurora Glow Orbs ─── */}
-      <div className="absolute top-0 left-1/4 w-[650px] h-[550px] bg-rose-500/[0.14] rounded-full blur-[160px] pointer-events-none z-0" />
-      <div className="absolute top-28 left-1/2 -translate-x-1/2 w-[750px] h-[450px] bg-amber-500/[0.13] rounded-full blur-[180px] pointer-events-none z-0" />
-      <div className="absolute top-10 right-1/4 w-[650px] h-[550px] bg-cyan-500/[0.14] rounded-full blur-[160px] pointer-events-none z-0" />
-      <div className="absolute top-[800px] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/[0.12] rounded-full blur-[200px] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/4 w-[750px] h-[550px] bg-rose-500/[0.14] rounded-full blur-[180px] pointer-events-none z-0" />
+      <div className="absolute top-28 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-amber-500/[0.13] rounded-full blur-[180px] pointer-events-none z-0" />
+      <div className="absolute top-10 right-1/4 w-[750px] h-[550px] bg-cyan-500/[0.14] rounded-full blur-[180px] pointer-events-none z-0" />
+      <div className="absolute top-[800px] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/[0.12] rounded-full blur-[210px] pointer-events-none z-0" />
+      <div className="absolute top-[1600px] left-1/4 w-[800px] h-[600px] bg-cyan-500/[0.12] rounded-full blur-[200px] pointer-events-none z-0" />
+      <div className="absolute top-[2300px] right-1/4 w-[850px] h-[650px] bg-rose-500/[0.12] rounded-full blur-[210px] pointer-events-none z-0" />
+      <div className="absolute top-[3000px] left-1/3 w-[800px] h-[550px] bg-amber-500/[0.10] rounded-full blur-[200px] pointer-events-none z-0" />
 
       {/* ─── Top Festive Announcement Ticker Bar ─── */}
       <div className="relative z-50 bg-gradient-to-r from-amber-500/25 via-rose-500/25 to-purple-500/25 border-b border-amber-500/25 py-2.5 px-4 backdrop-blur-xl">
@@ -477,15 +480,17 @@ export default function HomePage() {
             <Link
               key={deal.id}
               href={`/product/${deal.slug}`}
-              className="group relative rounded-2xl bg-[#0e0e1a]/80 border border-white/10 hover:border-cyan-400/50 hover:bg-[#131324] transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-[0_0_25px_rgba(63,227,255,0.2)]"
+              className="group relative rounded-2xl bg-gradient-to-b from-[#14162e]/90 via-[#0e1024]/90 to-[#0a0b18]/95 border border-white/[.12] hover:border-cyan-400/70 hover:shadow-[0_12px_36px_rgba(63,227,255,0.22)] transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg backdrop-blur-xl hover:-translate-y-1.5"
             >
               {/* Image Area */}
-              <div className="relative h-48 bg-gradient-to-b from-white/[.04] to-transparent flex items-center justify-center p-4 overflow-hidden">
+              <div className="relative h-48 bg-gradient-to-b from-white/[.05] via-purple-500/[.03] to-transparent flex items-center justify-center p-4 overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none" />
+
                 <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-gradient-to-r ${deal.badgeColor} shadow-md`}>
                   {deal.badge}
                 </span>
 
-                <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-bold">
+                <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[10px] font-black shadow-[0_0_12px_rgba(244,63,94,0.4)]">
                   {deal.discount}
                 </span>
 
@@ -495,33 +500,37 @@ export default function HomePage() {
                   alt={deal.title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
-                  className="max-h-36 max-w-36 object-contain group-hover:scale-110 transition-transform duration-500"
+                  className="max-h-36 max-w-36 object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-md"
                 />
               </div>
 
               {/* Product Info */}
               <div className="p-4 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-sm text-white/90 group-hover:text-cyan-300 transition-colors line-clamp-1">
+                  <h3 className="font-bold text-sm text-white/95 group-hover:text-cyan-300 transition-colors line-clamp-1">
                     {deal.title}
                   </h3>
-                  <p className="text-[11px] text-white/40 mt-0.5 line-clamp-1">{deal.subtitle}</p>
+                  <p className="text-[11px] text-white/50 mt-0.5 line-clamp-1">{deal.subtitle}</p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-white/[.06] flex items-end justify-between">
+                <div className="mt-4 pt-3 border-t border-white/[.08] flex items-end justify-between">
                   <div>
                     <span className="text-lg font-black text-white">{deal.price}</span>
-                    <span className="block text-[10px] text-white/35 line-through">{deal.mrp}</span>
+                    <span className="block text-[10px] text-white/40 line-through">{deal.mrp}</span>
                   </div>
 
-                  <span className={`text-[10px] font-bold px-2 py-1 rounded bg-white/[.05] border border-white/[.08] ${deal.storeColor}`}>
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded border ${
+                    deal.store.includes("Amazon")
+                      ? "bg-[#ff9900]/25 text-[#ffb03a] border-[#ff9900]/40 shadow-[0_0_8px_rgba(255,153,0,0.25)]"
+                      : "bg-[#2874f0]/25 text-[#70a9ff] border-[#2874f0]/40 shadow-[0_0_8px_rgba(40,116,240,0.25)]"
+                  }`}>
                     {deal.store}
                   </span>
                 </div>
 
                 <button
                   type="button"
-                  className="w-full mt-3 py-2 rounded-xl bg-gradient-to-r from-cyan-400/20 to-blue-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-bold group-hover:bg-cyan-400 group-hover:text-black transition-all flex items-center justify-center gap-1.5"
+                  className="w-full mt-3 py-2 rounded-xl bg-gradient-to-r from-cyan-400/20 to-blue-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-bold group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 group-hover:text-black transition-all flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(63,227,255,0.15)]"
                 >
                   <span>Compare & Buy</span>
                   <span>&rarr;</span>

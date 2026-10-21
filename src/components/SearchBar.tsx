@@ -124,7 +124,7 @@ export default function SearchBar({
         className={`relative flex items-center w-full transition-all duration-200 overflow-hidden ${
           isHero
             ? "h-16 md:h-20 bg-[#0d0d18]/90 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-[0_0_40px_rgba(244,63,94,0.2)] focus-within:border-cyan-400/70 focus-within:ring-2 focus-within:ring-cyan-400/25"
-            : "h-11 bg-white/[.06] border border-white/[.08] rounded-xl focus-within:border-cyan-400/50 focus-within:ring-2 focus-within:ring-cyan-400/20"
+            : "h-11 bg-[#131428]/90 border border-white/20 rounded-xl focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(63,227,255,0.25)] focus-within:ring-1 focus-within:ring-cyan-400/40"
         }`}
       >
         <div className={`text-white/40 flex items-center ${isHero ? "pl-6 md:pl-8" : "pl-3.5"}`}>
