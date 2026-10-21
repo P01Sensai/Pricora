@@ -106,7 +106,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <div className="min-h-screen bg-[#020204] text-white font-[Poppins,Inter,system-ui,sans-serif]">
       {/* ─── Top Bar ─── */}
       <header className="sticky top-0 z-50 backdrop-blur-2xl bg-[#020204]/80 border-b border-white/[.06]">
-        <div className="max-w-5xl mx-auto px-5 py-3 flex items-center gap-4">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <svg width="24" height="24" viewBox="0 0 48 48">
               <defs><linearGradient id="pg" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stopColor="#8ef4ff"/><stop offset="50%" stopColor="#35d8ff"/><stop offset="100%" stopColor="#0a86d8"/></linearGradient></defs>
@@ -115,13 +115,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <span className="text-sm font-[900] tracking-tight">PRICORA</span>
           </Link>
 
-          <div className="flex-1 max-w-md">
+          <div className="flex-1 max-w-xl">
             <SearchBar variant="header" placeholder="Search any product…" />
           </div>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-5 py-8">
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* ─── Breadcrumb ─── */}
         <nav className="flex items-center gap-1.5 text-[11px] text-white/30 mb-6">
           <Link href="/" className="hover:text-white/60 transition">Home</Link>
@@ -173,8 +173,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     </div>
                   )}
                   <p className="text-[11px] text-white/30">
-                    Lowest at <span className="text-white/60 font-medium">{bestListing?.store?.name}</span>
-                    {" · "}Compared across {inStockListings.length} store{inStockListings.length !== 1 ? "s" : ""}
+                    {bestListing ? (
+                      <>
+                        Lowest at <span className="text-white/60 font-medium">{bestListing.store?.name}</span>
+                        {" · "}Compared across {inStockListings.length} store{inStockListings.length !== 1 ? "s" : ""}
+                      </>
+                    ) : (
+                      <span className="text-amber-400 font-medium">Currently out of stock across tracked stores</span>
+                    )}
                   </p>
 
                   {bestListing && (
@@ -242,7 +248,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
 
           {/* ─── Right Sidebar ─── */}
-          <div className="space-y-5">
+          <div className="space-y-5 lg:sticky lg:top-24 h-fit">
             {/* Price Alert */}
             <div className="rounded-2xl bg-white/[.025] border border-cyan-400/30 p-5 shadow-[0_0_20px_rgba(63,227,255,0.05)]">
               <h3 className="text-sm font-semibold text-white/90 tracking-wide mb-2 flex items-center gap-2">
@@ -250,7 +256,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 Price Drop Alerts
               </h3>
               <p className="text-xs text-white/50 mb-4">We&apos;ll email you when the price drops below {bestListing?.current_price ? formatPrice(bestListing.current_price) : "current price"}.</p>
-              <PriceAlertForm defaultPrice={bestListing?.current_price ? formatPrice(bestListing.current_price) : undefined} />
+              <PriceAlertForm
+                productId={product.id}
+                currentPrice={bestListing?.current_price ?? undefined}
+                defaultPrice={bestListing?.current_price ? formatPrice(bestListing.current_price) : undefined}
+              />
             </div>
 
             {/* Specs */}

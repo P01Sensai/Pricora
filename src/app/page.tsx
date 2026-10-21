@@ -323,7 +323,7 @@ export default function HomePage() {
       </header>
 
       {/* ─── Main Hero Content with 3D Background Carousel ─── */}
-      <main className="relative z-10 w-full min-h-[calc(100vh-140px)] flex flex-col items-center justify-center px-4 pt-4 pb-16 overflow-hidden">
+      <main className="relative z-20 w-full min-h-[calc(100vh-140px)] flex flex-col items-center justify-center px-4 pt-4 pb-16">
         {/* 3D Background Carousel strictly centered behind Hero text & search */}
         <BackgroundCarousel />
         
@@ -349,7 +349,7 @@ export default function HomePage() {
         </p>
 
         {/* Massive Vibrant Search Bar with Live Instant Autocomplete */}
-        <div className="w-full max-w-3xl">
+        <div className="w-full max-w-3xl relative z-30">
           <SearchBar
             variant="hero"
             placeholder="Search iPhone 17, PS5, MacBook, Sony XM5, 4K OLED TV..."

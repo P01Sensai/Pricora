@@ -28,7 +28,7 @@ function ProductCardImage({
 }: {
   src?: string | null;
   alt: string;
-  categorySlug?: string;
+  categorySlug?: string | null;
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -94,7 +94,7 @@ function SearchResultsContent() {
   const sortedProducts = useMemo(() => {
     const list = [...products];
     if (sortBy === "price-asc") {
-      list.sort((a, b) => (a.lowest_price ?? 0) - (b.lowest_price ?? 0));
+      list.sort((a, b) => (a.lowest_price || Infinity) - (b.lowest_price || Infinity));
     } else if (sortBy === "price-desc") {
       list.sort((a, b) => (b.lowest_price ?? 0) - (a.lowest_price ?? 0));
     } else if (sortBy === "discount") {
