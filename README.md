@@ -95,22 +95,22 @@ Proprietary scoring function (`calculateDealScore`) evaluating market conditions
 
 ```mermaid
 graph TD
-    A[User / Browser Client] -->|Instant Search & Filter| B[Next.js App Router Frontend]
-    B -->|Fetch Suggestions| C[/api/suggestions]
-    B -->|Search Query| D[/api/search]
-    B -->|Set Price Alert| E[/api/alerts/subscribe]
-    B -->|Outbound Buy Click| F[/out/:listingId]
+    A["User / Browser Client"] -->|Instant Search & Filter| B["Next.js App Router Frontend"]
+    B -->|Fetch Suggestions| C["/api/suggestions"]
+    B -->|Search Query| D["/api/search"]
+    B -->|Set Price Alert| E["/api/alerts/subscribe"]
+    B -->|Outbound Buy Click| F["/out/:listingId"]
     
-    subgraph Core Pricing & Scraper Engine
-        G[Cheerio Web Scrapers] -->|Ingest Product Pages| H[Store Connectors: Amazon, Flipkart, Croma]
-        H -->|Normalize & De-duplicate| I[Product Catalog & Ingestion Pipeline]
-        I -->|Historical Pricing Time-Series| J[(PostgreSQL / Supabase)]
+    subgraph Core_Engine ["Core Pricing & Scraper Engine"]
+        G["Cheerio Web Scrapers"] -->|Ingest Product Pages| H["Store Connectors: Amazon, Flipkart, Croma"]
+        H -->|Normalize & De-duplicate| I["Product Catalog & Ingestion Pipeline"]
+        I -->|Historical Pricing Time-Series| J[("PostgreSQL / Supabase")]
     end
     
     C --> I
     D --> I
-    F -->|Log Click Telemetry| K[Conversion Analytics Logger]
-    F -->|Redirect to Store with Affiliate Tag| L[Merchant Storefront Checkout]
+    F -->|Log Click Telemetry| K["Conversion Analytics Logger"]
+    F -->|Redirect to Store with Affiliate Tag| L["Merchant Storefront Checkout"]
 ```
 
 ---
