@@ -266,9 +266,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─── 3D Carousel in Background ─── */}
-      <BackgroundCarousel />
-
       {/* ─── Floating Radiant Glass Navbar ─── */}
       <header className="relative z-50 w-full p-4 md:p-6 flex justify-center">
         <div className="flex items-center justify-between w-full max-w-[1360px] h-16 px-6 rounded-full bg-[#0a0a14]/85 border border-white/10 backdrop-blur-2xl shadow-[0_0_35px_rgba(244,63,94,0.15),0_8px_32px_rgba(0,0,0,0.6)]">
@@ -325,8 +322,10 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* ─── Main Hero Content ─── */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pt-4 pb-12">
+      {/* ─── Main Hero Content with 3D Background Carousel ─── */}
+      <main className="relative z-10 w-full min-h-[calc(100vh-140px)] flex flex-col items-center justify-center px-4 pt-4 pb-16 overflow-hidden">
+        {/* 3D Background Carousel strictly centered behind Hero text & search */}
+        <BackgroundCarousel />
         
         {/* Shimmering Festive Glow Badge */}
         <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-cyan-500/15 border border-amber-400/40 backdrop-blur-md shadow-[0_0_25px_rgba(245,158,11,0.25)]">
