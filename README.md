@@ -4,7 +4,7 @@
   ### *Real-Time E-Commerce Price Comparison Engine for India*
 
   <p align="center">
-    <strong>Stop opening 10 browser tabs. Search once. Find the authentic lowest price across Amazon India, Flipkart & Croma instantly.</strong>
+    <strong>Stop opening 10 browser tabs. Search once. Compare authentic live prices across Amazon India, Flipkart & Croma in real time.</strong>
   </p>
 
   <p align="center">
@@ -12,19 +12,17 @@
     <a href="https://react.dev"><img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /></a>
     <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript_5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
     <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" /></a>
-    <a href="https://cheerio.js.org"><img src="https://img.shields.io/badge/Cheerio-Scraping-E88A1A?style=for-the-badge" alt="Cheerio" /></a>
     <a href="https://recharts.org"><img src="https://img.shields.io/badge/Recharts-Analytics-22c55e?style=for-the-badge" alt="Recharts" /></a>
     <a href="https://supabase.com"><img src="https://img.shields.io/badge/PostgreSQL-Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" /></a>
     <a href="#license"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" /></a>
   </p>
 
   <p align="center">
+    <a href="#-what-is-pricora">What is Pricora?</a> •
     <a href="#-key-features">Key Features</a> •
-    <a href="#-system-architecture">Architecture</a> •
+    <a href="#-how-it-works">How It Works</a> •
+    <a href="#-supported-stores">Supported Stores</a> •
     <a href="#-quick-start">Quick Start</a> •
-    <a href="#-store-connectors--scraping-engine">Scraper Engine</a> •
-    <a href="#-algorithmic-deal-scoring">Deal Scoring</a> •
-    <a href="#-api-reference">API Reference</a> •
     <a href="#-tech-stack">Tech Stack</a>
   </p>
 
@@ -32,299 +30,115 @@
 
 ---
 
-## 🌟 The Pricora Advantage
+## 💡 What is Pricora?
 
-Indian e-commerce is plagued by fluctuating festive prices, misleading discounts, and artificial urgency timers. **Pricora** solves this by scraping, aggregating, and analyzing live prices in real time, giving consumers authentic historical data and algorithmic buying advice.
+Online shoppers in India waste time jumping between multiple apps and tabs to find the best deal during festive sales and flash drops. **Pricora** is an intelligent price comparison platform that tracks, compares, and visualizes authentic product prices from top Indian retailers in real time.
 
-| Traditional Shopping Pain | The Pricora Solution |
+### Why Shoppers Love Pricora:
+
+| The Problem | How Pricora Solves It |
 | :--- | :--- |
-| **Tab Overload**: 5+ tabs open comparing prices manually | **Unified View**: Side-by-side pricing from Amazon, Flipkart & Croma in one tap |
-| **Fake Discounts**: Inflated MRPs during festive sales | **60-Day Price History**: Visual charts exposing real historical lows vs. fake drops |
-| **FOMO Manipulation**: Unverified countdown timers | **Algorithmic Deal Score**: Objective 0–100 score analyzing market spread & savings |
-| **Missed Drops**: Midnight flash sales sell out in minutes | **Instant Alerts**: Targeted email notifications the second a price drops below budget |
-| **Cluttered Interfaces**: Ads, popups, and bloatware | **Vibrant Cyberpunk UI**: Fast, responsive, ambient aurora design built with Tailwind CSS v4 |
+| **Tab Fatigue** | Compare Amazon, Flipkart, and Croma side-by-side in one single view |
+| **Fake Festive Discounts** | 60-day interactive price history graphs reveal authentic historical lows |
+| **Uncertainty ("Should I buy now?")** | Algorithmic Deal Score (0–100) tells you whether to buy or wait |
+| **Missed Midnight Drops** | Instant price drop email notifications when prices hit your budget |
+| **Cluttered Interfaces** | Vibrant, luminous cyberpunk design with ambient aurora lighting |
 
 ---
 
 ## ⚡ Key Features
 
-### 1. 🔍 Instant Keystroke Autocomplete
-- Ultra-responsive, debounced (`180ms`) live search suggestions powered by `/api/suggestions`.
-- Live thumbnail preview, brand categorization, store availability count, and instant lowest price.
-- Full keyboard navigation (`ArrowUp`, `ArrowDown`, `Enter`, `Escape`) and outside-click dismiss.
-
-### 2. 🪔 Vibrant Ambient Aurora & 3D Hero Carousel
-- Built with hardware-accelerated 3D mathematical ring projection (`perspective: 1200px`, `Math.sin`, `Math.cos`).
-- Dynamic ambient aurora lighting using multi-layer radial blurs (Electric Cyan, Rose Magenta, Golden Amber, Deep Violet).
-- Category quick-launch pills with glowing jewel tones:
-  - 🪔 *Festive Mega Deals* • 📱 *Smartphones* • 💻 *Laptops & PCs*
-  - 🎧 *Audio & Headphones* • 🎮 *Gaming & Consoles* • ⌚ *Wearables* • 📺 *Appliances*
-
-### 3. 🛍️ Real-Time Multi-Store Comparison
-- Automatically matches products across **Amazon India**, **Flipkart**, and **Croma**.
-- Direct tracking of stock status, delivery fees, and promotional discounts.
-- Highlights the verified **`★ BEST PRICE`** with clear savings badges (`-35% OFF`, `-56% OFF`).
-
-### 4. 🧠 Algorithmic Deal Scoring Engine
-Proprietary scoring function (`calculateDealScore`) evaluating market conditions:
-- **0 - 39 (Poor / Overpriced)**: Price is above average; advises to wait.
-- **40 - 59 (Fair)**: Standard market price; minimal active discount.
-- **60 - 79 (Good Deal)**: Substantial discount below historical average.
-- **80 - 100 (Unreal Steal 🔥)**: Historical low with extreme market spread; buy immediately.
-
-### 5. 📉 60-Day Interactive Historical Price Tracking
-- High-performance vector charts powered by **Recharts**.
-- Compare store-by-store historical fluctuations across customizable date ranges.
-- Dark glassmorphic tooltips displaying precise date and currency format (`₹`).
-
-### 6. 🔔 Instant Price Drop Email Alerts
-- Floating right sidebar alert module connected to `/api/alerts/subscribe`.
-- One-click threshold setting: users enter their email and target price to receive instant webhook triggers.
-
-### 7. 🛡️ Safe Outbound Affiliate Gateway
-- Centralized redirect controller (`/out/[id]`) that logs click conversions, applies store affiliate tags, and redirects with zero tracking delay.
-
-### 8. 📊 Real-Time Admin Telemetry Dashboard
-- Dedicated `/admin` monitoring console.
-- Real-time scrapers health status (Cheerio engine status).
-- Metrics tracking: total catalog products, multi-store listings, and live click conversions.
+- 🔍 **Instant Keystroke Autocomplete**: Search with real-time live suggestions, product thumbnails, and lowest price tags as you type.
+- 🛍️ **Side-by-Side Store Comparison**: Live price checks across Amazon India, Flipkart, and Croma with direct verified purchase links.
+- 📉 **60-Day Historical Price Charts**: Interactive time-series visualizer showing genuine price trends and true discount authenticity.
+- 🧠 **Algorithmic Deal Score (0–100)**: Instant verdict rating (*"Unreal Steal 🔥"*, *"Great Deal ✨"*, *"Fair Price"*) based on market price spread.
+- 🔔 **Targeted Price Drop Alerts**: Subscribe with your email and desired price threshold to receive automated drop alerts.
+- 🪔 **Festive Cyberpunk UI**: Sleek dark aesthetic illuminated by dynamic ambient aurora glows, 3D perspective hero cards, and glowing jewel-tone category filters.
+- 📊 **Real-Time Admin Telemetry**: Built-in monitoring console displaying live scraper status, tracked listings count, and outbound conversion metrics.
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ How It Works
 
 ```mermaid
 graph TD
-    A["User / Browser Client"] -->|Instant Search & Filter| B["Next.js App Router Frontend"]
-    B -->|Fetch Suggestions| C["/api/suggestions"]
-    B -->|Search Query| D["/api/search"]
-    B -->|Set Price Alert| E["/api/alerts/subscribe"]
-    B -->|Outbound Buy Click| F["/out/:listingId"]
+    User["👤 Shopper"] -->|"1. Search product"| UI["💻 Pricora Web App"]
+    UI -->|"2. Query live catalog"| Engine["⚡ Real-Time Price Engine"]
     
-    subgraph Core_Engine ["Core Pricing & Scraper Engine"]
-        G["Cheerio Web Scrapers"] -->|Ingest Product Pages| H["Store Connectors: Amazon, Flipkart, Croma"]
-        H -->|Normalize & De-duplicate| I["Product Catalog & Ingestion Pipeline"]
-        I -->|Historical Pricing Time-Series| J[("PostgreSQL / Supabase")]
+    subgraph Data_Pipeline ["Multi-Store Ingestion"]
+        Engine -->|"3. Aggregate & Compare"| Amazon["🟠 Amazon India"]
+        Engine -->|"3. Aggregate & Compare"| Flipkart["🔵 Flipkart"]
+        Engine -->|"3. Aggregate & Compare"| Croma["🟢 Croma"]
     end
     
-    C --> I
-    D --> I
-    F -->|Log Click Telemetry| K["Conversion Analytics Logger"]
-    F -->|Redirect to Store with Affiliate Tag| L["Merchant Storefront Checkout"]
+    Engine -->|"4. Price spread & history"| Verdict["🧠 Deal Score & 60-Day Chart"]
+    Verdict -->|"5. Best price recommendation"| User
+    User -->|"6. 1-Click Buy"| Merchant["🛒 Official Merchant Checkout"]
 ```
 
 ---
 
-## 📂 Project Structure
+## 🏪 Supported Stores
 
-```bash
-Pricora/
-├── database/
-│   └── schema.sql             # PostgreSQL schema (stores, products, listings, price history, clicks)
-├── public/                    # Static assets & web manifests
-├── src/
-│   ├── app/
-│   │   ├── admin/             # Live Telemetry & Health Dashboard (/admin)
-│   │   ├── api/
-│   │   │   ├── alerts/        # Price Drop Alert Subscription (/api/alerts/subscribe)
-│   │   │   ├── search/        # Real-time multi-query search endpoint (/api/search)
-│   │   │   └── suggestions/   # Keystroke autocomplete endpoint (/api/suggestions)
-│   │   ├── out/[id]/          # Outbound affiliate redirector & click logger (/out)
-│   │   ├── product/[slug]/    # Dynamic Product Details & Price Comparison page
-│   │   ├── search/            # Search results grid with filters & sorting
-│   │   ├── globals.css        # Tailwind CSS v4 design tokens & aurora animations
-│   │   ├── layout.tsx         # Root layout with Google Fonts (Inter, Poppins, Playfair)
-│   │   └── page.tsx           # Homepage with 3D carousel, ticker & deal showcase
-│   ├── components/
-│   │   ├── Navbar.tsx         # Responsive header
-│   │   ├── PriceAlertForm.tsx # Client price drop subscription form
-│   │   ├── PriceHistoryChart.tsx # 60-day interactive Recharts graph
-│   │   └── SearchBar.tsx      # Dual-mode (Hero/Header) autocomplete search component
-│   └── lib/
-│       ├── catalog-data.ts    # Curated, verified catalog with 130+ multi-store products
-│       ├── data.ts            # Catalog accessors, search filtering & click logging
-│       ├── deal-score.ts      # Algorithmic verdict & deal scoring engine
-│       └── types.ts           # Unified TypeScript interfaces
-└── workers/
-    ├── connectors/
-    │   ├── amazon.ts          # Amazon India Cheerio scraper with stealth headers
-    │   ├── flipkart.ts        # Flipkart Cheerio scraper
-    │   └── croma.ts           # Croma connector
-    └── index.ts               # Background worker runner
-```
+<div align="center">
+
+| Store | Status | Capabilities |
+| :---: | :---: | :--- |
+| **Amazon India** | 🟢 Active | Real-time pricing, Prime delivery status, stock verification |
+| **Flipkart** | 🟢 Active | Live Big Billion Days deals, discounts, verified merchant pricing |
+| **Croma** | 🟢 Active | Official electronics distributor pricing & brand warranty checks |
+
+</div>
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Node.js**: `v20.x` or higher
-- **Package Manager**: `npm`, `pnpm`, or `yarn`
+Get a local instance running in under a minute:
 
-### 1. Clone the Repository
 ```bash
+# 1. Clone the repository
 git clone https://github.com/P01Sensai/Pricora.git
 cd Pricora
-```
 
-### 2. Install Dependencies
-```bash
+# 2. Install dependencies
 npm install
-```
 
-### 3. Configure Environment Variables
-Create a `.env.local` file in the root directory:
-```env
-# App Configuration
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# Supabase / Database (Optional for in-memory mode)
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-DATABASE_URL=postgresql://user:password@localhost:5432/pricora
-
-# Email Alerts (Optional - Resend)
-RESEND_API_KEY=your_resend_key
-```
-
-### 4. Run Development Server
-```bash
+# 3. Start development server
 npm run dev
 ```
 
-Visit **`http://localhost:3000`** in your browser.
-
----
-
-## 🔌 Store Connectors & Scraping Engine
-
-Pricora implements robust scrapers in `workers/connectors/` designed specifically for Indian e-commerce layouts:
-
-```typescript
-// Example: Amazon Connector with Anti-Bot Headers
-const response = await fetch(url, {
-  headers: {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...",
-    "Accept-Language": "en-IN,en;q=0.9",
-    "Referer": "https://www.google.com/",
-  },
-});
-const $ = cheerio.load(await response.text());
-const priceText = $(".a-price-whole").first().text().replace(/[,.]/g, "");
-const pricePaise = parseInt(priceText, 10) * 100;
-```
-
-### Supported Stores
-- 🟠 **Amazon India (`amazon.in`)**: Tracks Prime deals, lightning sales, delivery costs, and stock states.
-- 🔵 **Flipkart (`flipkart.com`)**: Parses Big Billion Days drops, exchange offers, and assured badges.
-- 🟢 **Croma (`croma.com`)**: Scrapes official electronics distributor pricing for authentic warranty comparison.
-
----
-
-## 📊 Algorithmic Deal Scoring
-
-The scoring engine (`src/lib/deal-score.ts`) calculates a real-time rating between `0` and `100`:
-
-$$\text{Spread} = \frac{\text{Highest Price} - \text{Lowest Price}}{\text{Highest Price}}$$
-
-$$\text{Discount} = \frac{\text{MRP} - \text{Lowest Price}}{\text{MRP}}$$
-
-```typescript
-if (discount >= 0.40 && spread >= 0.15) {
-  return { score: 92, verdict: "Unreal Steal 🔥" };
-} else if (discount >= 0.20 || spread >= 0.10) {
-  return { score: 78, verdict: "Great Deal ✨" };
-} else if (discount >= 0.08) {
-  return { score: 62, verdict: "Good Value 👍" };
-} else {
-  return { score: 45, verdict: "Fair Market Price" };
-}
-```
-
----
-
-## 📡 API Reference
-
-### 1. Instant Search
-```http
-GET /api/search?q={query}
-```
-**Response:**
-```json
-{
-  "products": [
-    {
-      "id": "p-1",
-      "title": "Apple iPhone 17 Pro (128GB)",
-      "slug": "apple-iphone-17-pro-128gb",
-      "lowest_price": 12799900,
-      "store_listings": [
-        { "store": { "name": "Amazon India", "slug": "amazon" }, "current_price": 12799900, "in_stock": true },
-        { "store": { "name": "Flipkart", "slug": "flipkart" }, "current_price": 12899900, "in_stock": true }
-      ]
-    }
-  ]
-}
-```
-
-### 2. Autocomplete Suggestions
-```http
-GET /api/suggestions?q={prefix}
-```
-
-### 3. Price Drop Alert Subscription
-```http
-POST /api/alerts/subscribe
-Content-Type: application/json
-
-{
-  "email": "shopper@example.com",
-  "product_id": "p-1",
-  "current_price": 12799900
-}
-```
-
-### 4. Outbound Affiliate Redirector
-```http
-GET /out/{listingId}
-```
-*Appends tracking tags, records click timestamp in telemetry, and redirects directly to merchant product URL via HTTP 302.*
+Open **`http://localhost:3000`** in your browser.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technology | Description |
-| :--- | :--- | :--- |
-| **Framework** | [Next.js 16](https://nextjs.org) | Modern React framework using App Router & Server Components |
-| **Language** | [TypeScript 5](https://www.typescriptlang.org) | Strict type safety across frontend and scraping workers |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com) | Next-generation CSS engine with custom ambient aurora tokens |
-| **Visuals** | [Google Fonts](https://fonts.google.com) | *Inter*, *Poppins*, and *Playfair Display* typography |
-| **Scraper** | [Cheerio](https://cheerio.js.org) | Fast, flexible HTML parsing for real-time extraction |
-| **Visual Charts** | [Recharts](https://recharts.org) | Declarative SVG price tracking time-series visualizations |
-| **Database** | [PostgreSQL / Supabase](https://supabase.com) | Relational storage for products, stores, and price history |
-| **Worker Queue** | [BullMQ & Redis](https://bullmq.io) | Scheduled price scraping and monitoring jobs |
+- **Frontend & App Engine**: [Next.js 16 (App Router)](https://nextjs.org) with [React 19](https://react.dev) & [TypeScript](https://www.typescriptlang.org)
+- **Styling & Aesthetics**: [Tailwind CSS v4](https://tailwindcss.com) with custom ambient aurora lighting tokens
+- **Data Visualization**: [Recharts](https://recharts.org) for 60-day interactive SVG price history graphs
+- **Real-Time Ingestion**: Cheerio & Node.js multi-store connectors
+- **Database & Telemetry**: [PostgreSQL / Supabase](https://supabase.com) relational catalog storage
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Completed Milestones
 
-- [x] **Phase 1**: High-end cyberpunk design system with ambient aurora glows.
-- [x] **Phase 2**: Multi-store scraper connectors (Amazon India, Flipkart, Croma).
-- [x] **Phase 3**: Instant keystroke search suggestions & debounced autocomplete.
-- [x] **Phase 4**: 60-day interactive price history graph (Recharts).
-- [x] **Phase 5**: Algorithmic Deal Scoring Engine (`0-100` verdict).
-- [x] **Phase 6**: Outbound affiliate click tracking & redirect controller (`/out/[id]`).
-- [x] **Phase 7**: Real-time system health & admin monitoring dashboard (`/admin`).
-- [ ] **Phase 8**: Telegram & WhatsApp bot triggers for instant price crash alerts.
-- [ ] **Phase 9**: Chrome Extension for in-browser real-time price comparison overlays.
+- [x] Luminous festive aurora design system with 3D perspective carousel
+- [x] Real-time multi-store connectors (Amazon India, Flipkart, Croma)
+- [x] Instant debounced keystroke search suggestions & category filters
+- [x] 60-Day interactive historical price chart component
+- [x] Algorithmic deal score & verdict rating engine
+- [x] Instant price drop alert subscription workflow
+- [x] Outbound affiliate redirector & telemetry conversion logger
+- [x] Live admin health monitoring dashboard (`/admin`)
 
 ---
 
 ## 📄 License
 
-This project is open-source and licensed under the [MIT License](LICENSE).
+Distributed under the [MIT License](LICENSE).
 
 <div align="center">
-  <sub>Built with ❤️ for Indian smart shoppers. Powered by Next.js, Cheerio & Tailwind CSS.</sub>
+  <sub>Built with ❤️ for Indian smart shoppers.</sub>
 </div>
