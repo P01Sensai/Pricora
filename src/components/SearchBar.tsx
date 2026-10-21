@@ -173,9 +173,12 @@ export default function SearchBar({
         {isHero && (
           <button
             type="submit"
-            className="h-full px-6 md:px-10 bg-cyan-500 text-black font-bold text-sm md:text-base hover:bg-cyan-400 transition-colors shrink-0"
+            className="h-full px-6 md:px-10 bg-gradient-to-r from-amber-400 via-rose-500 to-cyan-400 text-black font-black text-sm md:text-base hover:brightness-110 shadow-[0_0_25px_rgba(244,63,94,0.4)] transition-all shrink-0 flex items-center gap-2 cursor-pointer"
           >
-            Search
+            <span>Search Deals</span>
+            <svg className="w-4 h-4 text-black stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
           </button>
         )}
       </form>
