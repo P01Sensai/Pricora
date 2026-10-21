@@ -3,6 +3,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, useMemo, Suspense } from "react";
 import Link from "next/link";
+import SearchBar from "@/components/SearchBar";
 import type { Product } from "@/lib/types";
 
 function formatPrice(paise: number): string {
@@ -19,6 +20,49 @@ const CATEGORIES = [
   { label: "Wearables ⌚", value: "wearables" },
   { label: "Appliances 📺", value: "appliances" },
 ];
+
+function ProductCardImage({
+  src,
+  alt,
+  categorySlug,
+}: {
+  src?: string | null;
+  alt: string;
+  categorySlug?: string;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  const getFallbackIcon = () => {
+    const c = categorySlug?.toLowerCase() || "";
+    if (c.includes("laptop")) return "💻";
+    if (c.includes("smart") || c.includes("phone")) return "📱";
+    if (c.includes("audio") || c.includes("headphone")) return "🎧";
+    if (c.includes("gaming") || c.includes("console")) return "🎮";
+    if (c.includes("wearable") || c.includes("watch")) return "⌚";
+    if (c.includes("appliance") || c.includes("tv")) return "📺";
+    return "📦";
+  };
+
+  if (!src || failed) {
+    return (
+      <div className="w-20 h-20 rounded-2xl bg-white/[.04] border border-white/[.08] flex items-center justify-center text-4xl shadow-inner">
+        {getFallbackIcon()}
+      </div>
+    );
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      referrerPolicy="no-referrer"
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+    />
+  );
+}
 
 function SearchResultsContent() {
   const router = useRouter();
@@ -75,7 +119,7 @@ function SearchResultsContent() {
     <div className="min-h-screen bg-[#020204] text-white font-[Poppins,Inter,system-ui,sans-serif]">
       {/* ─── Sticky Search Bar ─── */}
       <header className="sticky top-0 z-50 backdrop-blur-2xl bg-[#020204]/85 border-b border-white/[.06]">
-        <div className="max-w-6xl mx-auto px-5 py-4 flex items-center gap-4">
+        <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             <svg width="28" height="28" viewBox="0 0 48 48">
               <defs>
@@ -91,26 +135,17 @@ function SearchResultsContent() {
             <span className="text-[16px] font-[900] tracking-tight group-hover:text-cyan-400 transition-colors">PRICORA</span>
           </Link>
 
-          <form action="/search" className="flex-1 max-w-xl">
-            <div className="relative">
-              <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 opacity-50" fill="none" stroke="currentColor" strokeWidth="2.4" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
-              <input
-                name="q"
-                defaultValue={rawQuery}
-                placeholder="Search iPhone, PS5, Sony Headphones, Laptops..."
-                className="w-full h-11 pl-10 pr-4 rounded-xl bg-white/[.06] border border-white/[.08] text-sm text-white placeholder:text-white/40 outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition"
-              />
-            </div>
-          </form>
-
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs font-medium">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <span>Live Web Scraper</span>
+          <div className="flex-1 max-w-2xl">
+            <SearchBar
+              variant="header"
+              defaultValue={rawQuery}
+              placeholder="Search iPhone, PS5, Sony Headphones, Laptops..."
+            />
           </div>
         </div>
 
         {/* ─── Category Quick Filter Chips ─── */}
-        <div className="max-w-6xl mx-auto px-5 pb-3 overflow-x-auto flex items-center gap-2 no-scrollbar">
+        <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 pb-3 overflow-x-auto flex items-center gap-2 no-scrollbar">
           {CATEGORIES.map((cat) => {
             const isActive = rawQuery.toLowerCase() === cat.value.toLowerCase() || (!rawQuery && !cat.value);
             return (
@@ -131,12 +166,12 @@ function SearchResultsContent() {
       </header>
 
       {/* ─── Results Area ─── */}
-      <main className="max-w-6xl mx-auto px-5 py-8">
+      <main className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Results stats & Sorting Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-xl font-bold text-white">
-              {rawQuery ? `Results for "${rawQuery}"` : "Humongous Catalog & Live Deals"}
+              {rawQuery ? `Results for "${rawQuery}"` : "Trending Products & Festive Deals"}
             </h1>
             <p className="text-white/50 text-xs mt-1">
               {loading ? "Searching Amazon & Flipkart in real time..." : `Showing ${sortedProducts.length} verified products with price comparisons`}
@@ -160,8 +195,8 @@ function SearchResultsContent() {
 
         {/* Loading Skeletons */}
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 gap-5">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
               <div key={i} className="rounded-2xl bg-white/[.03] border border-white/[.06] h-80 animate-pulse" />
             ))}
           </div>
@@ -186,7 +221,7 @@ function SearchResultsContent() {
 
         {/* Products Grid */}
         {!loading && sortedProducts.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 gap-5">
             {sortedProducts.map((product) => {
               const lowest = product.store_listings?.reduce((min, l) =>
                 l.current_price && l.in_stock && (!min || l.current_price < min.current_price!)
@@ -207,16 +242,11 @@ function SearchResultsContent() {
                 >
                   {/* Top Image area */}
                   <div className="relative h-52 bg-gradient-to-b from-white/[.02] to-transparent flex items-center justify-center p-5 overflow-hidden">
-                    {product.image_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={product.image_url}
-                        alt={product.title}
-                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-20 h-20 rounded-2xl bg-white/[.06] flex items-center justify-center text-3xl">📦</div>
-                    )}
+                    <ProductCardImage
+                      src={product.image_url}
+                      alt={product.title}
+                      categorySlug={product.category?.slug ?? product.category_id}
+                    />
 
                     {discount > 0 && (
                       <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[11px] font-bold shadow-lg">

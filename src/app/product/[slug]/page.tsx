@@ -3,6 +3,7 @@ import { getProductBySlug } from "@/lib/data";
 import { calculateDealScore } from "@/lib/deal-score";
 import PriceHistoryChart from "@/components/PriceHistoryChart";
 import PriceAlertForm from "@/components/PriceAlertForm";
+import SearchBar from "@/components/SearchBar";
 import type { StoreListing } from "@/lib/types";
 
 function formatPrice(paise: number): string {
@@ -24,7 +25,7 @@ function StoreRow({ listing, isBest }: { listing: StoreListing; isBest: boolean 
 
   return (
     <a
-      href={listing.url}
+      href={`/out/${listing.id}`}
       target="_blank"
       rel="noopener noreferrer"
       className="group flex items-center justify-between p-4 rounded-xl bg-white/[.025] border border-white/[.07] hover:border-cyan-400/30 hover:bg-white/[.04] transition-all duration-300"
@@ -114,12 +115,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <span className="text-sm font-[900] tracking-tight">PRICORA</span>
           </Link>
 
-          <form action="/search" className="flex-1 max-w-md">
-            <div className="relative">
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 opacity-40" fill="none" stroke="currentColor" strokeWidth="2.4" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
-              <input name="q" placeholder="Search…" className="w-full h-9 pl-9 pr-4 rounded-lg bg-white/[.05] border border-white/[.07] text-sm text-white placeholder:text-white/30 outline-none focus:border-cyan-400/40 transition" />
-            </div>
-          </form>
+          <div className="flex-1 max-w-md">
+            <SearchBar variant="header" placeholder="Search any product…" />
+          </div>
         </div>
       </header>
 
@@ -143,9 +141,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <div className="shrink-0 w-full sm:w-48 h-48 rounded-xl bg-gradient-to-br from-white/[.04] to-transparent flex items-center justify-center p-3">
                   {product.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={product.image_url} alt={product.title} className="max-h-40 max-w-40 object-contain" />
+                    <img
+                      src={product.image_url}
+                      alt={product.title}
+                      referrerPolicy="no-referrer"
+                      className="max-h-40 max-w-40 object-contain"
+                    />
                   ) : (
-                    <span className="text-5xl">🎧</span>
+                    <span className="text-5xl">📦</span>
                   )}
                 </div>
 
@@ -173,6 +176,22 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     Lowest at <span className="text-white/60 font-medium">{bestListing?.store?.name}</span>
                     {" · "}Compared across {inStockListings.length} store{inStockListings.length !== 1 ? "s" : ""}
                   </p>
+
+                  {bestListing && (
+                    <div className="mt-4">
+                      <a
+                        href={`/out/${bestListing.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black text-xs font-bold hover:brightness-110 shadow-[0_0_15px_rgba(63,227,255,0.3)] transition-all"
+                      >
+                        Buy on {bestListing.store?.name}
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

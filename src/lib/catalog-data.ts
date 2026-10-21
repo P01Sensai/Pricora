@@ -18489,9 +18489,9 @@ export const HUMONGOUS_CATALOG: (Product & { is_trending?: boolean; is_festive_d
     "slug": "apple-macbook-pro-14-m3-pro-space-black",
     "brand_id": "b-apple",
     "category_id": "c-laptops",
-    "image_url": "https://m.media-amazon.com/images/I/61RJnUTPRzL._SX679_.jpg",
+    "image_url": "https://m.media-amazon.com/images/I/71jG+e7roXL._AC_UY218_.jpg",
     "images": [
-      "https://m.media-amazon.com/images/I/61RJnUTPRzL._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/71jG+e7roXL._AC_UY218_.jpg"
     ],
     "model_number": null,
     "gtin": "B0CM5JS83L",
@@ -19897,9 +19897,9 @@ export const HUMONGOUS_CATALOG: (Product & { is_trending?: boolean; is_festive_d
     "slug": "lenovo-legion-pro-5-rtx4070",
     "brand_id": "b-lenovo",
     "category_id": "c-laptops",
-    "image_url": "https://m.media-amazon.com/images/I/71r4zIoxPGL._SX679_.jpg",
+    "image_url": "https://m.media-amazon.com/images/I/81fyeRNwpKL._AC_UY218_.jpg",
     "images": [
-      "https://m.media-amazon.com/images/I/71r4zIoxPGL._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/81fyeRNwpKL._AC_UY218_.jpg"
     ],
     "model_number": null,
     "gtin": "B0C9G77K37",
@@ -20851,9 +20851,9 @@ export const HUMONGOUS_CATALOG: (Product & { is_trending?: boolean; is_festive_d
     "slug": "asus-rog-zephyrus-g14-oled-2024",
     "brand_id": "b-asus",
     "category_id": "c-laptops",
-    "image_url": "https://m.media-amazon.com/images/I/71f8vU8tEGL._SX679_.jpg",
+    "image_url": "https://m.media-amazon.com/images/I/71fg+YsiT3L._AC_UY218_.jpg",
     "images": [
-      "https://m.media-amazon.com/images/I/71f8vU8tEGL._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/71fg+YsiT3L._AC_UY218_.jpg"
     ],
     "model_number": null,
     "gtin": "B0CSG6F5Y2",
@@ -21805,9 +21805,9 @@ export const HUMONGOUS_CATALOG: (Product & { is_trending?: boolean; is_festive_d
     "slug": "dell-xps-15-9530-core-i7",
     "brand_id": "b-dell",
     "category_id": "c-laptops",
-    "image_url": "https://m.media-amazon.com/images/I/71tP58m+Z4L._SX679_.jpg",
+    "image_url": "https://m.media-amazon.com/images/I/716tfglNg+L._AC_UY218_.jpg",
     "images": [
-      "https://m.media-amazon.com/images/I/71tP58m+Z4L._SX679_.jpg"
+      "https://m.media-amazon.com/images/I/716tfglNg+L._AC_UY218_.jpg"
     ],
     "model_number": null,
     "gtin": "B0C6B86C45",

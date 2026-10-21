@@ -225,3 +225,75 @@ export async function getPriceHistory(listingId: string): Promise<PriceHistory[]
 
   return [];
 }
+
+/**
+ * Fetch a store listing by ID across dynamic cache, humongous catalog, and database.
+ */
+export async function getListingById(listingId: string): Promise<StoreListing | null> {
+  // Check dynamic cache products
+  for (const p of DYNAMIC_CACHE.values()) {
+    const listing = p.store_listings?.find(l => l.id === listingId);
+    if (listing) return listing;
+  }
+
+  // Check humongous catalog
+  for (const p of HUMONGOUS_CATALOG) {
+    const listing = p.store_listings?.find(l => l.id === listingId);
+    if (listing) return listing;
+  }
+
+  // Check database
+  try {
+    const { data } = await supabase
+      .from("store_listings")
+      .select("*, store:stores(*)")
+      .eq("id", listingId)
+      .single();
+
+    if (data) return data as StoreListing;
+  } catch (err) {
+    // Continue
+  }
+
+  return null;
+}
+
+// In-memory click tracking analytics buffer
+export const IN_MEMORY_CLICKS: Array<{
+  listingId: string;
+  store: string;
+  url: string;
+  userAgent?: string;
+  referrer?: string;
+  timestamp: string;
+}> = [];
+
+/**
+ * Log an outbound affiliate click event
+ */
+export async function recordClickEvent(listing: StoreListing, reqMeta?: { userAgent?: string; referrer?: string; ip?: string }) {
+  const event = {
+    listingId: listing.id,
+    store: listing.store?.name ?? "Unknown",
+    url: listing.url,
+    userAgent: reqMeta?.userAgent,
+    referrer: reqMeta?.referrer,
+    timestamp: new Date().toISOString()
+  };
+
+  IN_MEMORY_CLICKS.push(event);
+  if (IN_MEMORY_CLICKS.length > 500) IN_MEMORY_CLICKS.shift();
+
+  try {
+    await supabase.from("click_events").insert({
+      listing_id: listing.id,
+      session_id: reqMeta?.ip || "anonymous",
+      referrer: reqMeta?.referrer,
+      device: reqMeta?.userAgent ? (reqMeta.userAgent.includes("Mobile") ? "mobile" : "desktop") : "desktop",
+      clicked_at: new Date().toISOString()
+    });
+  } catch (err) {
+    // Non-blocking log failure
+  }
+}
+

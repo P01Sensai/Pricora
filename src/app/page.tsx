@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import SearchBar from "@/components/SearchBar";
 
 // Extract the 3D Carousel into a reusable background component
 function BackgroundCarousel() {
@@ -127,7 +128,7 @@ export default function HomePage() {
         {/* Glow Badge */}
         <div className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[.03] border border-white/[.1] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#3fe3ff]" />
-          <span className="text-xs font-medium text-white/90">Live Amazon & Flipkart Scraper Engine</span>
+          <span className="text-xs font-medium text-white/90">Real-Time Price Intelligence Engine</span>
         </div>
 
         {/* Hero Text */}
@@ -137,28 +138,16 @@ export default function HomePage() {
         </h1>
         
         <p className="text-center text-white/50 text-base md:text-lg max-w-xl mb-12">
-          Compare real-time prices across Amazon India, Flipkart, and Croma instantly. Over 130+ verified festive deals with live web scraping.
+          Compare real-time prices across Amazon India, Flipkart, and Croma instantly. Over 140+ verified festive deals tracked live.
         </p>
 
-        {/* Massive Search Bar (Functional) */}
-        <form onSubmit={handleSearch} className="w-full max-w-2xl relative group">
-          <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 opacity-20 blur-xl group-hover:opacity-40 transition duration-500" />
-          <div className="relative flex items-center w-full h-16 md:h-20 bg-black/60 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
-            <div className="pl-6 md:pl-8 text-white/40">
-              <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
-            </div>
-            <input 
-              name="q"
-              type="text"
-              required
-              placeholder="Search iPhone 17, PS5, MacBook, Sony XM5..."
-              className="w-full h-full bg-transparent px-4 text-base md:text-xl text-white placeholder:text-white/30 outline-none"
-            />
-            <button type="submit" className="h-full px-6 md:px-10 bg-cyan-500 text-black font-bold text-sm md:text-base hover:bg-cyan-400 transition-colors">
-              Search
-            </button>
-          </div>
-        </form>
+        {/* Massive Search Bar with Live Instant Autocomplete */}
+        <div className="w-full max-w-2xl">
+          <SearchBar
+            variant="hero"
+            placeholder="Search iPhone 17, PS5, MacBook, Sony XM5..."
+          />
+        </div>
 
         {/* Trending tags */}
         <div className="flex flex-wrap justify-center items-center gap-3 mt-8">
