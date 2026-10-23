@@ -25,7 +25,11 @@ export const metadata: Metadata = {
   description: "Find the best deals across Amazon, Flipkart, Croma and more.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"
