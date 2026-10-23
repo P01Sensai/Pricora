@@ -47,6 +47,7 @@ export interface Product {
   brand?: Brand;
   category?: Category;
   store_listings?: StoreListing[];
+  ai_summary?: AIReviewSummary;
 }
 
 export interface StoreListing {
@@ -83,4 +84,27 @@ export interface DealScore {
   verdict: "Great deal" | "Good deal" | "Fair" | "Wait";
   breakdown: Record<string, number> | null;
   calculated_at: string;
+}
+
+export interface AIReviewQuestion {
+  question: string;
+  answer: string;
+}
+
+export interface AITopicRating {
+  topic: string;
+  score: number; // e.g. 9.4 out of 10
+  sentiment: "positive" | "mixed" | "negative";
+}
+
+export interface AIReviewSummary {
+  sentiment_score: number; // 0-100 (percentage positive)
+  total_reviews_analyzed: number;
+  rating: number; // 1-5 scale (e.g. 4.7)
+  verdict: string;
+  recommendation: "Strong Buy" | "Recommended" | "Consider" | "Wait for Discount";
+  pros: string[];
+  cons: string[];
+  topic_breakdown: AITopicRating[];
+  common_questions: AIReviewQuestion[];
 }

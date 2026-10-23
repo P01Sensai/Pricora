@@ -369,9 +369,15 @@ function SearchResultsContent() {
                   {/* Info area */}
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <p className="text-[10px] font-bold tracking-wider text-cyan-400 uppercase mb-1.5">
-                        {product.brand?.name ?? "Electronics"} · {product.category?.name ?? "Deals"}
-                      </p>
+                      <div className="flex items-center justify-between gap-1 mb-1.5">
+                        <p className="text-[10px] font-bold tracking-wider text-cyan-400 uppercase">
+                          {product.brand?.name ?? "Electronics"} · {product.category?.name ?? "Deals"}
+                        </p>
+                        <span className="text-[10px] font-bold text-purple-300 bg-purple-500/15 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0 shadow-[0_0_8px_rgba(168,85,247,0.2)]">
+                          <span>✨</span>
+                          <span>{["Apple", "Sony", "Samsung", "Asus", "Bose"].includes(product.brand?.name ?? "") ? "95%" : "91%"} AI</span>
+                        </span>
+                      </div>
                       <h3 className="text-sm font-bold text-white/95 leading-snug line-clamp-2 mb-3 group-hover:text-cyan-300 transition-colors">
                         {product.title}
                       </h3>

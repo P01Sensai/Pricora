@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { getProductBySlug } from "@/lib/data";
 import { calculateDealScore } from "@/lib/deal-score";
+import { getAIReviewSummary } from "@/lib/ai-sentiment";
 import PriceHistoryChart from "@/components/PriceHistoryChart";
 import PriceAlertForm from "@/components/PriceAlertForm";
+import AIReviewSummaryCard from "@/components/AIReviewSummaryCard";
 import SearchBar from "@/components/SearchBar";
 import type { StoreListing } from "@/lib/types";
 
@@ -156,6 +158,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     : 0;
 
   const dealScore = calculateDealScore(listings);
+  const aiSummary = getAIReviewSummary(product);
 
   return (
     <div className="relative min-h-screen bg-[#060713] text-white font-[Poppins,Inter,system-ui,sans-serif] selection:bg-rose-500 selection:text-white overflow-x-hidden">
@@ -341,6 +344,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
             
+            {/* AI Review & Customer Sentiment Summarizer */}
+            <AIReviewSummaryCard product={product} summary={aiSummary} />
+
             {/* Price Comparison */}
             <div id="comparison">
               <div className="flex items-center justify-between mb-4">
