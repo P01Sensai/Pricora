@@ -5,6 +5,8 @@ import { STORES } from "@/lib/catalog-data";
 import type { Product } from "@/lib/types";
 import { cacheGet, cacheSet } from "@/lib/redis";
 
+import { checkRateLimit, rateLimitExceededResponse, getRateLimitHeaders } from "@/lib/rate-limit";
+
 function generateScrapedHistory(currentPricePaise: number) {
   const history = [];
   const now = Date.now();
@@ -22,6 +24,13 @@ function generateScrapedHistory(currentPricePaise: number) {
 }
 
 export async function GET(request: NextRequest) {
+  // 0. Rate limiting protection (60 req/min per IP)
+  const rl = await checkRateLimit(request, { limit: 60, windowSeconds: 60, keyPrefix: "search" });
+  if (!rl.allowed) {
+    return rateLimitExceededResponse(rl);
+  }
+  const rlHeaders = getRateLimitHeaders(rl);
+
   const q = request.nextUrl.searchParams.get("q")?.trim() ?? "";
   const cacheKey = `api_search:${q.toLowerCase()}`;
 
@@ -33,7 +42,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
           ...cached,
           cached: true,
-        });
+        }, { headers: rlHeaders });
       }
     } catch {
       // Ignore cache read errors
@@ -170,5 +179,5 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.json(responsePayload);
+  return NextResponse.json(responsePayload, { headers: rlHeaders });
 }

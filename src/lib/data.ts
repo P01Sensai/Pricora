@@ -3,6 +3,7 @@ import type { Product, StoreListing, PriceHistory } from "./types";
 import { HUMONGOUS_CATALOG, STORES } from "./catalog-data";
 
 import { cacheGet, cacheSet } from "./redis";
+import { compactPriceHistory } from "./price-history";
 
 // In-memory cache for dynamically live-scraped items so they can be viewed on /product/[slug]
 const DYNAMIC_CACHE = new Map<string, Product>();
@@ -231,7 +232,7 @@ export async function getPriceHistory(listingId: string): Promise<PriceHistory[]
       .order("recorded_at", { ascending: true })
       .limit(90);
 
-    if (data && data.length > 0) return data as PriceHistory[];
+    if (data && data.length > 0) return compactPriceHistory(data as PriceHistory[]);
   } catch (err) {
     // Continue
   }
@@ -240,7 +241,7 @@ export async function getPriceHistory(listingId: string): Promise<PriceHistory[]
   for (const p of HUMONGOUS_CATALOG) {
     const listing = p.store_listings?.find(l => l.id === listingId);
     if (listing?.price_history && listing.price_history.length > 0) {
-      return listing.price_history;
+      return compactPriceHistory(listing.price_history);
     }
   }
 
