@@ -23,57 +23,57 @@ const CATEGORIES: CategoryConfig[] = [
     label: "All Deals",
     value: "",
     icon: "✨",
-    activeColor: "bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 text-black font-black shadow-[0_0_18px_rgba(63,227,255,0.45)]",
-    inactiveColor: "bg-white/[.04] text-white/80 hover:text-white hover:bg-white/[.08] border-white/10",
+    activeColor: "bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 text-black font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-zinc-300 hover:text-white hover:bg-zinc-800 border-zinc-800",
   },
   {
     label: "Festive Mega Deals",
     value: "festive",
     icon: "🪔",
-    activeColor: "bg-gradient-to-r from-amber-400 to-orange-500 text-black font-black shadow-[0_0_18px_rgba(245,158,11,0.5)]",
-    inactiveColor: "bg-amber-500/[.08] text-amber-300 hover:bg-amber-500/[.15] border-amber-500/30",
+    activeColor: "bg-gradient-to-r from-amber-400 to-orange-500 text-black font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-amber-300 hover:bg-amber-500/10 border-amber-500/25",
   },
   {
     label: "Smartphones",
     value: "smartphones",
     icon: "📱",
-    activeColor: "bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white font-black shadow-[0_0_18px_rgba(217,70,239,0.5)]",
-    inactiveColor: "bg-fuchsia-500/[.08] text-fuchsia-300 hover:bg-fuchsia-500/[.15] border-fuchsia-500/30",
+    activeColor: "bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-fuchsia-300 hover:bg-fuchsia-500/10 border-fuchsia-500/25",
   },
   {
     label: "Laptops & PCs",
     value: "laptops",
     icon: "💻",
-    activeColor: "bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-black shadow-[0_0_18px_rgba(56,189,248,0.5)]",
-    inactiveColor: "bg-cyan-500/[.08] text-cyan-300 hover:bg-cyan-500/[.15] border-cyan-500/30",
+    activeColor: "bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-cyan-300 hover:bg-cyan-500/10 border-cyan-500/25",
   },
   {
     label: "Audio & Headphones",
     value: "audio",
     icon: "🎧",
-    activeColor: "bg-gradient-to-r from-rose-500 to-orange-500 text-white font-black shadow-[0_0_18px_rgba(244,63,94,0.5)]",
-    inactiveColor: "bg-rose-500/[.08] text-rose-300 hover:bg-rose-500/[.15] border-rose-500/30",
+    activeColor: "bg-gradient-to-r from-rose-500 to-orange-500 text-white font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-rose-300 hover:bg-rose-500/10 border-rose-500/25",
   },
   {
     label: "Gaming & Consoles",
     value: "gaming",
     icon: "🎮",
-    activeColor: "bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-black shadow-[0_0_18px_rgba(52,211,153,0.5)]",
-    inactiveColor: "bg-emerald-500/[.08] text-emerald-300 hover:bg-emerald-500/[.15] border-emerald-500/30",
+    activeColor: "bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-emerald-300 hover:bg-emerald-500/10 border-emerald-500/25",
   },
   {
     label: "Smart Wearables",
     value: "wearables",
     icon: "⌚",
-    activeColor: "bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black shadow-[0_0_18px_rgba(168,85,247,0.5)]",
-    inactiveColor: "bg-purple-500/[.08] text-purple-300 hover:bg-purple-500/[.15] border-purple-500/30",
+    activeColor: "bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-purple-300 hover:bg-purple-500/10 border-purple-500/25",
   },
   {
     label: "Smart Appliances",
     value: "appliances",
     icon: "📺",
-    activeColor: "bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-black shadow-[0_0_18px_rgba(234,179,8,0.5)]",
-    inactiveColor: "bg-yellow-500/[.08] text-yellow-300 hover:bg-yellow-500/[.15] border-yellow-500/30",
+    activeColor: "bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-black shadow-sm",
+    inactiveColor: "bg-[#121215] text-yellow-300 hover:bg-yellow-500/10 border-yellow-500/25",
   },
 ];
 
@@ -172,36 +172,29 @@ function SearchResultsContent() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#060713] text-white font-[Poppins,Inter,system-ui,sans-serif] selection:bg-rose-500 selection:text-white overflow-x-hidden">
-      
-      {/* ─── Ambient Colorful Aurora Lighting ─── */}
-      <div className="fixed top-0 left-1/4 w-[750px] h-[550px] bg-rose-500/[0.14] rounded-full blur-[180px] pointer-events-none z-0" />
-      <div className="fixed top-24 right-1/4 w-[750px] h-[550px] bg-cyan-500/[0.14] rounded-full blur-[180px] pointer-events-none z-0" />
-      <div className="fixed top-[650px] left-1/3 w-[850px] h-[650px] bg-purple-600/[0.12] rounded-full blur-[210px] pointer-events-none z-0" />
-      <div className="fixed bottom-0 right-1/4 w-[750px] h-[550px] bg-amber-500/[0.12] rounded-full blur-[180px] pointer-events-none z-0" />
-
+    <div className="relative min-h-screen bg-[#09090b] text-zinc-100 font-sans selection:bg-zinc-800 selection:text-white overflow-x-hidden">
       {/* ─── Top Festive Announcement Ticker Bar ─── */}
-      <div className="relative z-50 bg-gradient-to-r from-amber-500/25 via-rose-500/25 to-purple-500/25 border-b border-amber-500/25 py-2 px-4 backdrop-blur-xl">
+      <div className="relative z-50 bg-[#121215] border-b border-zinc-800 py-2 px-4">
         <div className="max-w-[1560px] mx-auto flex items-center justify-between gap-4 text-xs">
           <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
             <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-gradient-to-r from-amber-400 to-orange-500 text-black shadow-sm">
               🔥 LIVE PRICES
             </span>
-            <span className="font-semibold text-white/95">
+            <span className="font-medium text-zinc-200">
               Live dual-store price checks across Amazon India, Flipkart & Croma · Zero markups
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-3 text-white/70 font-medium shrink-0">
-            <span className="text-emerald-400 flex items-center gap-1.5 text-[11px] font-bold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-              Real-Time Scrapers Online
+          <div className="hidden sm:flex items-center gap-3 text-zinc-400 font-medium shrink-0">
+            <span className="text-emerald-400 flex items-center gap-1.5 text-[11px] font-medium font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+              Scrapers Online
             </span>
           </div>
         </div>
       </div>
 
-      {/* ─── Sticky Vibrant Search Header ─── */}
-      <header className="sticky top-0 z-40 backdrop-blur-2xl bg-[#08091a]/85 border-b border-white/[.1]">
+      {/* ─── Sticky Clean Search Header ─── */}
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-[#09090b]/90 border-b border-zinc-800">
         <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             <svg width="28" height="28" viewBox="0 0 48 48">
@@ -273,12 +266,12 @@ function SearchResultsContent() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-[#121326] border border-white/20 rounded-xl px-3.5 py-2 text-xs font-semibold text-white outline-none focus:border-cyan-400 focus:shadow-[0_0_15px_rgba(63,227,255,0.25)] transition"
+              className="bg-[#121215] border border-zinc-800 rounded-xl px-3.5 py-2 text-xs font-semibold text-white outline-none focus:border-zinc-600 transition"
             >
-              <option value="featured" className="bg-[#101018] text-white">✨ Featured Deals</option>
-              <option value="discount" className="bg-[#101018] text-white">🔥 Highest Discount</option>
-              <option value="price-asc" className="bg-[#101018] text-white">💰 Price: Low to High</option>
-              <option value="price-desc" className="bg-[#101018] text-white">💎 Price: High to Low</option>
+              <option value="featured" className="bg-[#121215] text-white">✨ Featured Deals</option>
+              <option value="discount" className="bg-[#121215] text-white">🔥 Highest Discount</option>
+              <option value="price-asc" className="bg-[#121215] text-white">💰 Price: Low to High</option>
+              <option value="price-desc" className="bg-[#121215] text-white">💎 Price: High to Low</option>
             </select>
           </div>
         </div>
@@ -287,22 +280,22 @@ function SearchResultsContent() {
         {loading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 min-[1800px]:grid-cols-6 gap-5">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-              <div key={i} className="rounded-2xl bg-white/[.04] border border-white/10 h-84 animate-pulse" />
+              <div key={i} className="rounded-xl bg-[#121215] border border-zinc-800 h-84 animate-pulse" />
             ))}
           </div>
         )}
 
         {/* Empty state */}
         {!loading && sortedProducts.length === 0 && (
-          <div className="text-center py-24 bg-gradient-to-b from-[#14152b]/80 to-[#0c0d1e]/90 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+          <div className="text-center py-24 bg-[#121215] border border-zinc-800 rounded-2xl p-8 shadow-xl">
             <div className="text-6xl mb-4">🔍</div>
             <p className="text-white text-2xl font-black mb-2">No matching products found</p>
-            <p className="text-white/50 text-sm max-w-md mx-auto mb-6">
+            <p className="text-zinc-400 text-sm max-w-md mx-auto mb-6">
               Try searching for popular terms like &quot;iPhone 17&quot;, &quot;PS5 Console&quot;, &quot;Sony XM5&quot;, or &quot;MacBook Air&quot;.
             </p>
             <button
               onClick={() => router.push("/search")}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black text-sm font-black hover:brightness-110 shadow-[0_0_20px_rgba(63,227,255,0.4)] transition cursor-pointer"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black text-sm font-black hover:brightness-110 transition cursor-pointer shadow-sm"
             >
               View All 130+ Deals &rarr;
             </button>
@@ -328,12 +321,10 @@ function SearchResultsContent() {
                   key={product.id}
                   href={`/product/${product.slug}`}
                   prefetch={false}
-                  className="group relative rounded-2xl bg-gradient-to-b from-[#14162e]/90 via-[#0e1024]/90 to-[#0a0b18]/95 border border-white/[.12] overflow-hidden hover:border-cyan-400/70 hover:shadow-[0_12px_36px_rgba(63,227,255,0.22)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between backdrop-blur-xl"
+                  className="group relative rounded-xl bg-[#121215] border border-zinc-800 hover:border-zinc-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden"
                 >
                   {/* Top Image area */}
-                  <div className="relative h-52 bg-gradient-to-b from-white/[.05] via-purple-500/[.03] to-transparent flex items-center justify-center p-5 overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none" />
-
+                  <div className="relative h-52 bg-zinc-900/40 flex items-center justify-center p-5 overflow-hidden border-b border-zinc-800/60">
                     <ProductCardImage
                       src={product.image_url}
                       alt={product.title}
@@ -341,7 +332,7 @@ function SearchResultsContent() {
                     />
 
                     {discount > 0 && (
-                      <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[11px] font-black shadow-[0_0_12px_rgba(244,63,94,0.4)]">
+                      <span className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-rose-500/90 text-white text-[10px] font-black shadow-sm">
                         -{discount}% OFF
                       </span>
                     )}
@@ -349,17 +340,17 @@ function SearchResultsContent() {
                     {/* Store icons preview with vibrant store colors */}
                     <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
                       {stores.includes("amazon") && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ff9900]/25 text-[#ffb03a] border border-[#ff9900]/40 shadow-[0_0_8px_rgba(255,153,0,0.25)]">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#ff9900]/10 text-[#ff9900] border border-[#ff9900]/30">
                           Amazon
                         </span>
                       )}
                       {stores.includes("flipkart") && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#2874f0]/25 text-[#70a9ff] border border-[#2874f0]/40 shadow-[0_0_8px_rgba(40,116,240,0.25)]">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#2874f0]/10 text-[#60a5fa] border border-[#2874f0]/30">
                           Flipkart
                         </span>
                       )}
                       {stores.includes("croma") && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#00b300]/25 text-[#4ade80] border border-[#00b300]/40 shadow-[0_0_8px_rgba(0,179,0,0.25)]">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#00b300]/10 text-[#4ade80] border border-[#00b300]/30">
                           Croma
                         </span>
                       )}
@@ -373,7 +364,7 @@ function SearchResultsContent() {
                         <p className="text-[10px] font-bold tracking-wider text-cyan-400 uppercase">
                           {product.brand?.name ?? "Electronics"} · {product.category?.name ?? "Deals"}
                         </p>
-                        <span className="text-[10px] font-bold text-purple-300 bg-purple-500/15 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0 shadow-[0_0_8px_rgba(168,85,247,0.2)]">
+                        <span className="text-[10px] font-bold text-purple-300 bg-purple-500/15 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
                           <span>✨</span>
                           <span>{["Apple", "Sony", "Samsung", "Asus", "Bose"].includes(product.brand?.name ?? "") ? "95%" : "91%"} AI</span>
                         </span>
@@ -383,13 +374,13 @@ function SearchResultsContent() {
                       </h3>
                     </div>
 
-                    <div className="pt-3 border-t border-white/[.08] flex items-end justify-between">
+                    <div className="pt-3 border-t border-zinc-800/80 flex items-end justify-between">
                       <div>
                         {lowest?.current_price ? (
                           <>
                             <span className="text-lg font-black text-white">{formatPrice(lowest.current_price)}</span>
                             {mrp && mrp > lowest.current_price && (
-                              <span className="text-xs text-white/40 line-through ml-2">{formatPrice(mrp)}</span>
+                              <span className="text-xs text-zinc-500 line-through ml-2">{formatPrice(mrp)}</span>
                             )}
                           </>
                         ) : (
@@ -397,7 +388,7 @@ function SearchResultsContent() {
                         )}
                       </div>
 
-                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all flex items-center gap-1 shadow-[0_0_10px_rgba(63,227,255,0.15)]">
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all flex items-center gap-1">
                         Compare &rarr;
                       </span>
                     </div>
@@ -414,7 +405,7 @@ function SearchResultsContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#060713]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#09090b]" />}>
       <SearchResultsContent />
     </Suspense>
   );

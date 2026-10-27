@@ -55,13 +55,13 @@ export default function PriceAlertForm({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter email for price drop alerts..."
-        className="flex-1 w-0 h-10 rounded-xl bg-white/[.05] border border-white/[.1] text-xs px-3.5 outline-none focus:border-cyan-400/50 text-white placeholder:text-white/30"
+        className="flex-1 w-0 h-10 rounded-xl bg-[#121215] border border-zinc-700/80 text-xs px-3.5 outline-none focus:border-zinc-500 text-white placeholder:text-zinc-500"
         required
       />
       <button
         type="submit"
         disabled={loading}
-        className="h-10 px-5 rounded-xl bg-cyan-400 text-black text-xs font-bold hover:bg-cyan-300 transition shrink-0 disabled:opacity-50 cursor-pointer shadow-[0_0_15px_rgba(63,227,255,0.25)]"
+        className="h-10 px-5 rounded-xl bg-cyan-400 text-black text-xs font-bold hover:bg-cyan-300 transition shrink-0 disabled:opacity-50 cursor-pointer"
       >
         {loading ? "Setting..." : "Notify Me"}
       </button>

@@ -113,21 +113,16 @@ export default function SearchBar({
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>
-      {/* Outer Glow in Hero mode */}
-      {isHero && (
-        <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-amber-400 via-rose-500 via-purple-500 to-cyan-400 opacity-25 blur-xl group-hover:opacity-45 transition duration-500 pointer-events-none" />
-      )}
-
       {/* Main Form Bar */}
       <form
         onSubmit={handleSubmit}
         className={`relative flex items-center w-full transition-all duration-200 overflow-hidden ${
           isHero
-            ? "h-16 md:h-20 bg-[#0d0d18]/90 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-[0_0_40px_rgba(244,63,94,0.2)] focus-within:border-cyan-400/70 focus-within:ring-2 focus-within:ring-cyan-400/25"
-            : "h-11 bg-[#131428]/90 border border-white/20 rounded-xl focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(63,227,255,0.25)] focus-within:ring-1 focus-within:ring-cyan-400/40"
+            ? "h-16 md:h-20 bg-[#121215] border border-zinc-700/80 rounded-2xl shadow-xl focus-within:border-zinc-500"
+            : "h-11 bg-[#121215] border border-zinc-800 rounded-xl focus-within:border-zinc-600"
         }`}
       >
-        <div className={`text-white/40 flex items-center ${isHero ? "pl-6 md:pl-8" : "pl-3.5"}`}>
+        <div className={`text-zinc-400 flex items-center ${isHero ? "pl-6 md:pl-8" : "pl-3.5"}`}>
           <svg
             className={isHero ? "w-6 h-6 md:w-7 md:h-7" : "w-4 h-4"}
             fill="none"
@@ -149,7 +144,7 @@ export default function SearchBar({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           autoComplete="off"
-          className={`w-full h-full bg-transparent text-white placeholder:text-white/30 outline-none ${
+          className={`w-full h-full bg-transparent text-white placeholder:text-zinc-500 outline-none ${
             isHero ? "px-4 text-base md:text-xl" : "px-3 text-sm"
           }`}
         />
@@ -162,7 +157,7 @@ export default function SearchBar({
               setSuggestions([]);
               setIsOpen(false);
             }}
-            className="p-2 text-white/30 hover:text-white transition"
+            className="p-2 text-zinc-400 hover:text-white transition"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -173,7 +168,7 @@ export default function SearchBar({
         {isHero && (
           <button
             type="submit"
-            className="h-full px-6 md:px-10 bg-gradient-to-r from-amber-400 via-rose-500 to-cyan-400 text-black font-black text-sm md:text-base hover:brightness-110 shadow-[0_0_25px_rgba(244,63,94,0.4)] transition-all shrink-0 flex items-center gap-2 cursor-pointer"
+            className="h-full px-6 md:px-10 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 text-black font-black text-sm md:text-base hover:brightness-110 transition-all shrink-0 flex items-center gap-2 cursor-pointer"
           >
             <span>Search Deals</span>
             <svg className="w-4 h-4 text-black stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,9 +180,9 @@ export default function SearchBar({
 
       {/* ─── Instant Suggestions Dropdown ─── */}
       {isOpen && suggestions.length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-2.5 z-[100] rounded-2xl bg-[#08080e]/95 backdrop-blur-2xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="absolute left-0 right-0 top-full mt-2.5 z-[100] rounded-xl bg-[#121215] border border-zinc-800 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
           <div className="p-2">
-            <div className="px-3 py-1.5 flex items-center justify-between text-[11px] font-semibold text-white/40 tracking-wider uppercase border-b border-white/[.06]">
+            <div className="px-3 py-1.5 flex items-center justify-between text-[11px] font-semibold text-zinc-400 tracking-wider uppercase border-b border-zinc-800">
               <span>Instant Suggestions</span>
               {isLoading && <span className="text-cyan-400 animate-pulse">Searching…</span>}
             </div>
@@ -201,10 +196,10 @@ export default function SearchBar({
                     href={`/product/${item.slug}`}
                     prefetch={false}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between p-2.5 rounded-xl transition-all ${
+                    className={`flex items-center justify-between p-2.5 rounded-lg transition-all ${
                       isSelected
-                        ? "bg-white/[.08] text-white border border-cyan-400/40"
-                        : "text-white/80 hover:bg-white/[.04] hover:text-white"
+                        ? "bg-zinc-800 text-white border border-zinc-700"
+                        : "text-zinc-200 hover:bg-zinc-800/60 hover:text-white"
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0 pr-3">

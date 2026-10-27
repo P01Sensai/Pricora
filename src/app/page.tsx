@@ -236,25 +236,15 @@ const CATEGORY_CARDS = [
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#060713] text-white overflow-x-hidden font-sans flex flex-col selection:bg-rose-500 selection:text-white">
-      
-      {/* ─── Vibrant Ambient Aurora Glow Orbs ─── */}
-      <div className="absolute top-0 left-1/4 w-[750px] h-[550px] bg-rose-500/[0.14] rounded-full blur-[180px] pointer-events-none z-0" />
-      <div className="absolute top-28 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-amber-500/[0.13] rounded-full blur-[180px] pointer-events-none z-0" />
-      <div className="absolute top-10 right-1/4 w-[750px] h-[550px] bg-cyan-500/[0.14] rounded-full blur-[180px] pointer-events-none z-0" />
-      <div className="absolute top-[800px] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/[0.12] rounded-full blur-[210px] pointer-events-none z-0" />
-      <div className="absolute top-[1600px] left-1/4 w-[800px] h-[600px] bg-cyan-500/[0.12] rounded-full blur-[200px] pointer-events-none z-0" />
-      <div className="absolute top-[2300px] right-1/4 w-[850px] h-[650px] bg-rose-500/[0.12] rounded-full blur-[210px] pointer-events-none z-0" />
-      <div className="absolute top-[3000px] left-1/3 w-[800px] h-[550px] bg-amber-500/[0.10] rounded-full blur-[200px] pointer-events-none z-0" />
-
+    <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-x-hidden font-sans flex flex-col selection:bg-zinc-800 selection:text-white">
       {/* ─── Top Festive Announcement Ticker Bar ─── */}
-      <div className="relative z-50 bg-gradient-to-r from-amber-500/25 via-rose-500/25 to-purple-500/25 border-b border-amber-500/25 py-2.5 px-4 backdrop-blur-xl">
+      <div className="relative z-50 bg-[#121215] border-b border-zinc-800 py-2.5 px-4">
         <div className="max-w-[1560px] mx-auto flex items-center justify-between gap-4 text-xs md:text-sm">
           <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-            <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[11px] font-black uppercase tracking-wider animate-pulse shadow-[0_0_12px_rgba(251,191,36,0.5)]">
+            <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[11px] font-black uppercase tracking-wider shadow-sm">
               🔥 FESTIVE PRICE CRASH
             </span>
-            <span className="text-white/90 font-medium">
+            <span className="text-zinc-200 font-medium">
               Amazon Great Indian Festival & Flipkart Big Billion Days price drops are live!
             </span>
           </div>
@@ -269,9 +259,9 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─── Floating Radiant Glass Navbar ─── */}
+      {/* ─── Floating Clean Navbar ─── */}
       <header className="relative z-50 w-full p-4 md:p-6 flex justify-center">
-        <div className="flex items-center justify-between w-full max-w-[1360px] h-16 px-6 rounded-full bg-[#0a0a14]/85 border border-white/10 backdrop-blur-2xl shadow-[0_0_35px_rgba(244,63,94,0.15),0_8px_32px_rgba(0,0,0,0.6)]">
+        <div className="flex items-center justify-between w-full max-w-[1360px] h-16 px-6 rounded-2xl bg-[#121215]/90 border border-zinc-800 backdrop-blur-xl shadow-xl">
           <Link href="/" className="flex items-center gap-2.5 group">
             <svg width="26" height="26" viewBox="0 0 48 48">
               <defs>
@@ -293,31 +283,31 @@ export default function HomePage() {
           <nav className="hidden lg:flex items-center gap-5 text-sm font-medium">
             <Link
               href="/search?q=festive"
-              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/40 text-amber-300 font-bold shadow-[0_0_15px_rgba(251,191,36,0.3)] hover:brightness-125 transition"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold hover:brightness-125 transition"
             >
               <span>Festive Deals</span>
               <span>🪔</span>
             </Link>
-            <Link href="/search?q=smartphones" className="text-white/70 hover:text-fuchsia-300 hover:drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] transition">
+            <Link href="/search?q=smartphones" className="text-zinc-400 hover:text-white transition">
               Smartphones 📱
             </Link>
-            <Link href="/search?q=laptops" className="text-white/70 hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.6)] transition">
+            <Link href="/search?q=laptops" className="text-zinc-400 hover:text-white transition">
               Laptops 💻
             </Link>
-            <Link href="/search?q=audio" className="text-white/70 hover:text-rose-300 hover:drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] transition">
+            <Link href="/search?q=audio" className="text-zinc-400 hover:text-white transition">
               Audio 🎧
             </Link>
-            <Link href="/search?q=gaming" className="text-white/70 hover:text-emerald-300 hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.6)] transition">
+            <Link href="/search?q=gaming" className="text-zinc-400 hover:text-white transition">
               Gaming 🎮
             </Link>
-            <Link href="/search?q=appliances" className="text-white/70 hover:text-violet-300 hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.6)] transition">
+            <Link href="/search?q=appliances" className="text-zinc-400 hover:text-white transition">
               Appliances 📺
             </Link>
           </nav>
 
           <Link
             href="/search"
-            className="px-5 py-2 rounded-full bg-gradient-to-r from-amber-400 via-rose-500 to-cyan-400 text-black text-xs md:text-sm font-black shadow-[0_0_20px_rgba(244,63,94,0.4)] hover:brightness-110 hover:shadow-[0_0_30px_rgba(244,63,94,0.6)] transition-all flex items-center gap-1.5"
+            className="px-5 py-2 rounded-full bg-gradient-to-r from-amber-400 via-rose-500 to-cyan-400 text-black text-xs md:text-sm font-black hover:brightness-110 transition-all flex items-center gap-1.5 shadow-sm"
           >
             <span>Explore 140+ Deals</span>
             <span>&rarr;</span>
@@ -331,8 +321,8 @@ export default function HomePage() {
         <BackgroundCarousel />
         
         {/* Shimmering Festive Glow Badge */}
-        <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-cyan-500/15 border border-amber-400/40 backdrop-blur-md shadow-[0_0_25px_rgba(245,158,11,0.25)]">
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping shadow-[0_0_10px_#f59e0b]" />
+        <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           <span className="text-xs font-bold text-amber-200">
             ✨ FESTIVE PRICE TRACKING · Up to 65% Price Drops Live
           </span>
@@ -341,7 +331,7 @@ export default function HomePage() {
         {/* Hero Headline */}
         <h1 className="text-center font-black text-5xl sm:text-6xl md:text-8xl lg:text-9xl tracking-tight text-white mb-6 leading-none select-none">
           FIND THE BEST <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7170] via-[#ffe57f] via-[#46e8b2] via-[#35d8ff] to-[#bd6aff] drop-shadow-[0_0_40px_rgba(244,63,94,0.35)]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7170] via-[#ffe57f] via-[#46e8b2] via-[#35d8ff] to-[#bd6aff]">
             PRODUCT DEALS
           </span>
         </h1>
@@ -385,7 +375,7 @@ export default function HomePage() {
       </main>
 
       {/* ─── Continuous Live Deal Ticker (Urgency & Frenzy) ─── */}
-      <section className="relative z-10 w-full bg-[#0a0a14]/90 border-y border-white/10 py-3 overflow-hidden backdrop-blur-xl">
+      <section className="relative z-10 w-full bg-[#121215] border-y border-zinc-800 py-3 overflow-hidden">
         <div className="flex items-center gap-8 whitespace-nowrap animate-marquee">
           {[
             "🔥 iPhone 16 (128GB): ₹76,999 on Flipkart (-12% Instant Drop)",
@@ -430,7 +420,7 @@ export default function HomePage() {
             <Link
               key={cat.title}
               href={cat.href}
-              className={`group relative rounded-2xl bg-gradient-to-b ${cat.glow} border ${cat.border} p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl overflow-hidden`}
+              className="group relative rounded-xl bg-[#121215] border border-zinc-800 hover:border-zinc-700 p-5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden"
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="text-3xl group-hover:scale-125 transition-transform duration-300">{cat.icon}</span>
@@ -467,7 +457,7 @@ export default function HomePage() {
 
           <Link
             href="/search?q=festive"
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-rose-500 text-black text-xs sm:text-sm font-black hover:brightness-110 shadow-[0_0_20px_rgba(244,63,94,0.3)] transition-all flex items-center gap-1.5 shrink-0"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-rose-500 text-black text-xs sm:text-sm font-black hover:brightness-110 transition-all flex items-center gap-1.5 shrink-0 shadow-sm"
           >
             <span>See All 140+ Deals</span>
             <span>&rarr;</span>
@@ -480,17 +470,15 @@ export default function HomePage() {
             <Link
               key={deal.id}
               href={`/product/${deal.slug}`}
-              className="group relative rounded-2xl bg-gradient-to-b from-[#14162e]/90 via-[#0e1024]/90 to-[#0a0b18]/95 border border-white/[.12] hover:border-cyan-400/70 hover:shadow-[0_12px_36px_rgba(63,227,255,0.22)] transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-lg backdrop-blur-xl hover:-translate-y-1.5"
+              className="group relative rounded-xl bg-[#121215] border border-zinc-800 hover:border-zinc-700 hover:shadow-xl transition-all duration-200 flex flex-col justify-between overflow-hidden hover:-translate-y-1"
             >
               {/* Image Area */}
-              <div className="relative h-48 bg-gradient-to-b from-white/[.05] via-purple-500/[.03] to-transparent flex items-center justify-center p-4 overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none" />
-
-                <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-gradient-to-r ${deal.badgeColor} shadow-md`}>
+              <div className="relative h-48 bg-zinc-900/40 flex items-center justify-center p-4 overflow-hidden border-b border-zinc-800/60">
+                <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-gradient-to-r ${deal.badgeColor} shadow-sm`}>
                   {deal.badge}
                 </span>
 
-                <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-rose-500 to-pink-500 text-white text-[10px] font-black shadow-[0_0_12px_rgba(244,63,94,0.4)]">
+                <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-rose-500/90 text-white text-[10px] font-black shadow-sm">
                   {deal.discount}
                 </span>
 
@@ -500,29 +488,29 @@ export default function HomePage() {
                   alt={deal.title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
-                  className="max-h-36 max-w-36 object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-md"
+                  className="max-h-36 max-w-36 object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
               {/* Product Info */}
               <div className="p-4 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-sm text-white/95 group-hover:text-cyan-300 transition-colors line-clamp-1">
+                  <h3 className="font-semibold text-sm text-zinc-100 group-hover:text-cyan-400 transition-colors line-clamp-1">
                     {deal.title}
                   </h3>
-                  <p className="text-[11px] text-white/50 mt-0.5 line-clamp-1">{deal.subtitle}</p>
+                  <p className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">{deal.subtitle}</p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-white/[.08] flex items-end justify-between">
+                <div className="mt-4 pt-3 border-t border-zinc-800/60 flex items-end justify-between">
                   <div>
-                    <span className="text-lg font-black text-white">{deal.price}</span>
-                    <span className="block text-[10px] text-white/40 line-through">{deal.mrp}</span>
+                    <span className="text-lg font-bold text-zinc-100 font-mono">{deal.price}</span>
+                    <span className="block text-[10px] text-zinc-500 line-through font-mono">{deal.mrp}</span>
                   </div>
 
-                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded border ${
+                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${
                     deal.store.includes("Amazon")
-                      ? "bg-[#ff9900]/25 text-[#ffb03a] border-[#ff9900]/40 shadow-[0_0_8px_rgba(255,153,0,0.25)]"
-                      : "bg-[#2874f0]/25 text-[#70a9ff] border-[#2874f0]/40 shadow-[0_0_8px_rgba(40,116,240,0.25)]"
+                      ? "bg-[#ff9900]/10 text-[#ff9900] border-[#ff9900]/30"
+                      : "bg-[#2874f0]/10 text-[#60a5fa] border-[#2874f0]/30"
                   }`}>
                     {deal.store}
                   </span>
@@ -530,7 +518,7 @@ export default function HomePage() {
 
                 <button
                   type="button"
-                  className="w-full mt-3 py-2 rounded-xl bg-gradient-to-r from-cyan-400/20 to-blue-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-bold group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 group-hover:text-black transition-all flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(63,227,255,0.15)]"
+                  className="w-full mt-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 hover:text-white text-xs font-medium transition-all flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   <span>Compare & Buy</span>
                   <span>&rarr;</span>
@@ -543,39 +531,39 @@ export default function HomePage() {
 
       {/* ─── "Why Buy Via Pricora" Trust Section ─── */}
       <section className="relative z-10 max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="rounded-3xl bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-amber-900/20 border border-white/10 p-8 md:p-12 backdrop-blur-2xl shadow-[0_0_50px_rgba(244,63,94,0.1)]">
+        <div className="rounded-2xl bg-[#121215] border border-zinc-800 p-8 md:p-12 shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-2xl shadow-lg shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
                 ⚡
               </div>
               <div>
-                <h4 className="font-bold text-base text-white">Live Dual-Store Ingestion</h4>
-                <p className="text-xs text-white/60 mt-1 leading-relaxed">
+                <h4 className="font-semibold text-sm text-zinc-100">Live Dual-Store Ingestion</h4>
+                <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                   Real-time web scrapers track midnight price crashes across Amazon India and Flipkart before stock runs out.
                 </p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center text-2xl shadow-lg shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-xl shrink-0">
                 📉
               </div>
               <div>
-                <h4 className="font-bold text-base text-white">60-Day Price History</h4>
-                <p className="text-xs text-white/60 mt-1 leading-relaxed">
+                <h4 className="font-semibold text-sm text-zinc-100">60-Day Price History</h4>
+                <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                   Never fall for fake festive discounts. Our interactive price charts show you the authentic historical low.
                 </p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-2xl shadow-lg shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl shrink-0">
                 🛡️
               </div>
               <div>
-                <h4 className="font-bold text-base text-white">Guaranteed Direct Links</h4>
-                <p className="text-xs text-white/60 mt-1 leading-relaxed">
+                <h4 className="font-semibold text-sm text-zinc-100">Guaranteed Direct Links</h4>
+                <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                   Zero markups, zero hidden fees. One-click instant redirect directly to official merchant checkouts.
                 </p>
               </div>
@@ -585,7 +573,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="relative z-10 w-full border-t border-white/[.07] bg-[#05050c] py-8 text-center text-xs text-white/40">
+      <footer className="relative z-10 w-full border-t border-zinc-800 bg-[#09090b] py-8 text-center text-xs text-zinc-500">
         <p>© 2026 Pricora Inc. Real-Time Price Comparison Engine. Amazon & Flipkart are trademarks of their respective owners.</p>
       </footer>
 
