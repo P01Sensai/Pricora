@@ -394,6 +394,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </p>
               <PriceAlertForm
                 productId={product.id}
+                productTitle={product.title}
                 currentPrice={bestListing?.current_price ?? undefined}
                 defaultPrice={bestListing?.current_price ? formatPrice(bestListing.current_price) : undefined}
               />

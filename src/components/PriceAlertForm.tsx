@@ -4,10 +4,12 @@ import { useState } from "react";
 
 export default function PriceAlertForm({
   productId,
+  productTitle,
   currentPrice,
   defaultPrice,
 }: {
   productId?: string;
+  productTitle?: string;
   currentPrice?: number;
   defaultPrice?: string;
 }) {
@@ -27,6 +29,7 @@ export default function PriceAlertForm({
         body: JSON.stringify({
           email,
           product_id: productId || "p-generic",
+          product_title: productTitle || "Tracked Product",
           current_price: currentPrice || 100000,
         }),
       });
