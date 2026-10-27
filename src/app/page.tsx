@@ -238,7 +238,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-x-hidden font-sans flex flex-col selection:bg-zinc-800 selection:text-white">
       {/* ─── Top Festive Announcement Ticker Bar ─── */}
-      <div className="relative z-50 bg-[#121215] border-b border-zinc-800 py-2.5 px-4">
+      <div className="relative z-50 bg-[#121215]/80 backdrop-blur-md border-b border-white/[0.08] py-2.5 px-4">
         <div className="max-w-[1560px] mx-auto flex items-center justify-between gap-4 text-xs md:text-sm">
           <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
             <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-black text-[11px] font-black uppercase tracking-wider shadow-sm">
@@ -261,7 +261,7 @@ export default function HomePage() {
 
       {/* ─── Floating Clean Navbar ─── */}
       <header className="relative z-50 w-full p-4 md:p-6 flex justify-center">
-        <div className="flex items-center justify-between w-full max-w-[1360px] h-16 px-6 rounded-2xl bg-[#121215]/90 border border-zinc-800 backdrop-blur-xl shadow-xl">
+        <div className="flex items-center justify-between w-full max-w-[1360px] h-16 px-6 rounded-2xl bg-[#121215]/65 border border-white/[0.12] backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-saturate-150">
           <Link href="/" className="flex items-center gap-2.5 group">
             <svg width="26" height="26" viewBox="0 0 48 48">
               <defs>
@@ -375,7 +375,7 @@ export default function HomePage() {
       </main>
 
       {/* ─── Continuous Live Deal Ticker (Urgency & Frenzy) ─── */}
-      <section className="relative z-10 w-full bg-[#121215] border-y border-zinc-800 py-3 overflow-hidden">
+      <section className="relative z-10 w-full bg-[#121215]/60 border-y border-white/[0.08] backdrop-blur-xl py-3 overflow-hidden">
         <div className="flex items-center gap-8 whitespace-nowrap animate-marquee">
           {[
             "🔥 iPhone 16 (128GB): ₹76,999 on Flipkart (-12% Instant Drop)",
@@ -420,7 +420,7 @@ export default function HomePage() {
             <Link
               key={cat.title}
               href={cat.href}
-              className="group relative rounded-xl bg-[#121215] border border-zinc-800 hover:border-zinc-700 p-5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden"
+              className="group relative rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] hover:border-white/20 hover:bg-[#18181e]/75 p-5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-xl overflow-hidden"
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="text-3xl group-hover:scale-125 transition-transform duration-300">{cat.icon}</span>
@@ -470,10 +470,10 @@ export default function HomePage() {
             <Link
               key={deal.id}
               href={`/product/${deal.slug}`}
-              className="group relative rounded-xl bg-[#121215] border border-zinc-800 hover:border-zinc-700 hover:shadow-xl transition-all duration-200 flex flex-col justify-between overflow-hidden hover:-translate-y-1"
+              className="group relative rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] hover:border-white/20 hover:bg-[#18181e]/75 hover:shadow-[0_16px_36px_rgba(0,0,0,0.4)] transition-all duration-200 flex flex-col justify-between overflow-hidden hover:-translate-y-1"
             >
               {/* Image Area */}
-              <div className="relative h-48 bg-zinc-900/40 flex items-center justify-center p-4 overflow-hidden border-b border-zinc-800/60">
+              <div className="relative h-48 bg-white/[0.02] flex items-center justify-center p-4 overflow-hidden border-b border-white/[0.06]">
                 <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-gradient-to-r ${deal.badgeColor} shadow-sm`}>
                   {deal.badge}
                 </span>
@@ -501,7 +501,7 @@ export default function HomePage() {
                   <p className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">{deal.subtitle}</p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-zinc-800/60 flex items-end justify-between">
+                <div className="mt-4 pt-3 border-t border-white/[0.08] flex items-end justify-between">
                   <div>
                     <span className="text-lg font-bold text-zinc-100 font-mono">{deal.price}</span>
                     <span className="block text-[10px] text-zinc-500 line-through font-mono">{deal.mrp}</span>
@@ -518,7 +518,7 @@ export default function HomePage() {
 
                 <button
                   type="button"
-                  className="w-full mt-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 hover:text-white text-xs font-medium transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full mt-3 py-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] hover:border-white/20 text-zinc-200 hover:text-white text-xs font-medium transition-all flex items-center justify-center gap-1.5 backdrop-blur-md shadow-sm"
                 >
                   <span>Compare & Buy</span>
                   <span>&rarr;</span>
@@ -531,10 +531,10 @@ export default function HomePage() {
 
       {/* ─── "Why Buy Via Pricora" Trust Section ─── */}
       <section className="relative z-10 max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
-        <div className="rounded-2xl bg-[#121215] border border-zinc-800 p-8 md:p-12 shadow-lg">
+        <div className="rounded-2xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-8 md:p-12 shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0 backdrop-blur-md">
                 ⚡
               </div>
               <div>

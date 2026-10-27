@@ -43,11 +43,11 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
       : "bg-amber-500/15 text-amber-300 border border-amber-500/30 font-bold";
 
   return (
-    <div className="relative rounded-2xl bg-[#121215] border border-zinc-800 p-6 sm:p-8 shadow-sm overflow-hidden">
+    <div className="relative rounded-2xl bg-[#121215]/60 backdrop-blur-2xl border border-white/[0.08] p-6 sm:p-8 shadow-[0_12px_40px_rgba(0,0,0,0.35)] overflow-hidden">
       {/* ─── Header ─── */}
-      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800/80 pb-6 mb-6">
+      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-6 mb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-purple-300 text-[11px] font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-purple-300 text-[11px] font-bold uppercase tracking-wider mb-2 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
             <span>Pricora AI Sentiment Engine</span>
           </div>
@@ -61,7 +61,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
 
         {/* Top Badges */}
         <div className="flex items-center gap-3">
-          <span className={`px-3 py-1.5 rounded-lg text-xs tracking-wider ${recColor}`}>
+          <span className={`px-3 py-1.5 rounded-lg text-xs tracking-wider backdrop-blur-md ${recColor}`}>
             ★ {summary.recommendation}
           </span>
         </div>
@@ -70,7 +70,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
       {/* ─── Key Metrics & Score Ring ─── */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-[160px_1fr] gap-6 items-center mb-8">
         {/* Sentiment Gauge Ring */}
-        <div className="flex flex-col items-center justify-center p-5 rounded-xl bg-[#18181b] border border-zinc-800">
+        <div className="flex flex-col items-center justify-center p-5 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.08]">
           <div className={`w-20 h-20 rounded-full flex flex-col items-center justify-center border-4 ${sentimentColor}`}>
             <span className="text-2xl font-black">{summary.sentiment_score}%</span>
             <span className="text-[9px] font-bold text-zinc-400 tracking-wider uppercase">Positive</span>
@@ -83,7 +83,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
         </div>
 
         {/* AI Synthesized Verdict Quote */}
-        <div className="p-5 sm:p-6 rounded-xl bg-[#18181b] border border-zinc-800">
+        <div className="p-5 sm:p-6 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.08]">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xs font-bold text-purple-300 uppercase tracking-widest flex items-center gap-1.5">
               <span>🤖</span>
@@ -99,7 +99,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
       {/* ─── Pros & Cons Side-by-Side ─── */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
         {/* Pros */}
-        <div className="rounded-xl bg-emerald-950/20 border border-emerald-500/25 p-5">
+        <div className="rounded-xl bg-emerald-950/20 backdrop-blur-md border border-emerald-500/25 p-5">
           <h3 className="text-xs font-bold text-emerald-300 uppercase tracking-wider mb-3.5 flex items-center gap-2">
             <span className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xs">
               ✓
@@ -117,7 +117,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
         </div>
 
         {/* Cons */}
-        <div className="rounded-xl bg-rose-950/20 border border-rose-500/25 p-5">
+        <div className="rounded-xl bg-rose-950/20 backdrop-blur-md border border-rose-500/25 p-5">
           <h3 className="text-xs font-bold text-rose-300 uppercase tracking-wider mb-3.5 flex items-center gap-2">
             <span className="w-5 h-5 rounded-full bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-xs">
               !
@@ -136,7 +136,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
       </div>
 
       {/* ─── Topic Breakdown Progress Bars ─── */}
-      <div className="relative z-10 rounded-xl bg-[#18181b] border border-zinc-800 p-5 sm:p-6 mb-8">
+      <div className="relative z-10 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.08] p-5 sm:p-6 mb-8">
         <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-4 flex items-center gap-2">
           <span>📊</span>
           <span>Topic-by-Topic Satisfaction Ratings</span>
@@ -150,7 +150,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
                   <span className="text-zinc-300 font-medium">{t.topic}</span>
                   <span className="font-bold text-white">{t.score} / 10</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+                <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 transition-all duration-700"
                     style={{ width: `${pct}%` }}
@@ -163,7 +163,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
       </div>
 
       {/* ─── Interactive AI Q&A Assistant ─── */}
-      <div className="relative z-10 rounded-xl bg-[#18181b] border border-zinc-800 p-5 sm:p-6">
+      <div className="relative z-10 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.08] p-5 sm:p-6">
         <div className="flex items-center justify-between gap-4 mb-4">
           <div>
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
@@ -189,10 +189,10 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
                     setActiveQuestion(isSelected ? null : i);
                     setCustomAnswer(null);
                   }}
-                  className={`text-xs px-3.5 py-1.5 rounded-full border transition-all cursor-pointer font-medium text-left ${
+                  className={`text-xs px-3.5 py-1.5 rounded-full border transition-all cursor-pointer font-medium text-left backdrop-blur-md ${
                     isSelected
                       ? "bg-purple-500/20 text-purple-200 border-purple-500/40"
-                      : "bg-[#121215] text-zinc-300 hover:text-white hover:bg-zinc-800 border-zinc-800"
+                      : "bg-white/[0.04] text-zinc-300 hover:text-white hover:bg-white/[0.08] border-white/[0.08]"
                   }`}
                 >
                   {q.question}
@@ -204,7 +204,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
 
         {/* Display Active Question Answer */}
         {activeQuestion !== null && !customAnswer && summary.common_questions[activeQuestion] && (
-          <div className="p-4 rounded-xl bg-[#121215] border border-purple-500/30 text-xs sm:text-sm text-zinc-200 leading-relaxed animate-in fade-in duration-200 mb-4">
+          <div className="p-4 rounded-xl bg-purple-950/20 backdrop-blur-md border border-purple-500/30 text-xs sm:text-sm text-zinc-200 leading-relaxed animate-in fade-in duration-200 mb-4">
             <span className="font-bold text-purple-300 block mb-1">
               Q: {summary.common_questions[activeQuestion].question}
             </span>
@@ -214,7 +214,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
 
         {/* Display Custom Question Answer */}
         {customAnswer && (
-          <div className="p-4 rounded-xl bg-[#121215] border border-cyan-500/30 text-xs sm:text-sm text-zinc-200 leading-relaxed animate-in fade-in duration-200 mb-4">
+          <div className="p-4 rounded-xl bg-cyan-950/20 backdrop-blur-md border border-cyan-500/30 text-xs sm:text-sm text-zinc-200 leading-relaxed animate-in fade-in duration-200 mb-4">
             <span className="font-bold text-cyan-300 block mb-1">
               AI Review Intelligence:
             </span>
@@ -229,7 +229,7 @@ export default function AIReviewSummaryCard({ product, summary }: Props) {
             value={customQuestion}
             onChange={(e) => setCustomQuestion(e.target.value)}
             placeholder="E.g. Is it good for low light photos? Does it come with a charger?"
-            className="flex-1 w-0 h-10 rounded-xl bg-[#121215] border border-zinc-700/80 text-xs px-4 outline-none focus:border-zinc-500 text-white placeholder:text-zinc-500"
+            className="flex-1 w-0 h-10 rounded-xl bg-white/[0.03] backdrop-blur-md border border-white/[0.1] text-xs px-4 outline-none focus:border-white/30 text-white placeholder:text-zinc-500"
           />
           <button
             type="submit"

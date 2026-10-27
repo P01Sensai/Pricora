@@ -31,33 +31,33 @@ function StoreRow({ listing, isBest }: { listing: StoreListing; isBest: boolean 
     btnHover: string;
   }> = {
     amazon: {
-      bg: "bg-[#121215]",
-      border: "border-zinc-800",
+      bg: "bg-[#121215]/60 backdrop-blur-xl",
+      border: "border-white/[0.08]",
       hoverBorder: "hover:border-[#ff9900]/50",
-      hoverShadow: "hover:shadow-md",
-      badgeBg: "bg-[#ff9900]/10",
+      hoverShadow: "hover:shadow-lg hover:bg-[#18181e]/75",
+      badgeBg: "bg-[#ff9900]/10 backdrop-blur-md",
       badgeText: "text-[#ff9900]",
       badgeBorder: "border-[#ff9900]/30",
       storeNameColor: "text-zinc-100",
       btnHover: "hover:bg-[#ff9900] hover:text-black",
     },
     flipkart: {
-      bg: "bg-[#121215]",
-      border: "border-zinc-800",
+      bg: "bg-[#121215]/60 backdrop-blur-xl",
+      border: "border-white/[0.08]",
       hoverBorder: "hover:border-[#2874f0]/50",
-      hoverShadow: "hover:shadow-md",
-      badgeBg: "bg-[#2874f0]/10",
+      hoverShadow: "hover:shadow-lg hover:bg-[#18181e]/75",
+      badgeBg: "bg-[#2874f0]/10 backdrop-blur-md",
       badgeText: "text-[#60a5fa]",
       badgeBorder: "border-[#2874f0]/30",
       storeNameColor: "text-zinc-100",
       btnHover: "hover:bg-[#2874f0] hover:text-white",
     },
     croma: {
-      bg: "bg-[#121215]",
-      border: "border-zinc-800",
+      bg: "bg-[#121215]/60 backdrop-blur-xl",
+      border: "border-white/[0.08]",
       hoverBorder: "hover:border-[#00b300]/50",
-      hoverShadow: "hover:shadow-md",
-      badgeBg: "bg-[#00b300]/10",
+      hoverShadow: "hover:shadow-lg hover:bg-[#18181e]/75",
+      badgeBg: "bg-[#00b300]/10 backdrop-blur-md",
       badgeText: "text-[#4ade80]",
       badgeBorder: "border-[#00b300]/30",
       storeNameColor: "text-zinc-100",
@@ -66,11 +66,11 @@ function StoreRow({ listing, isBest }: { listing: StoreListing; isBest: boolean 
   };
 
   const theme = STORE_THEMES[storeSlug] ?? {
-    bg: "bg-[#121215]",
-    border: "border-zinc-800",
+    bg: "bg-[#121215]/60 backdrop-blur-xl",
+    border: "border-white/[0.08]",
     hoverBorder: "hover:border-zinc-700",
-    hoverShadow: "hover:shadow-md",
-    badgeBg: "bg-zinc-800",
+    hoverShadow: "hover:shadow-lg hover:bg-[#18181e]/75",
+    badgeBg: "bg-zinc-800/80 backdrop-blur-md",
     badgeText: "text-zinc-300",
     badgeBorder: "border-zinc-700",
     storeNameColor: "text-zinc-100",
@@ -120,7 +120,7 @@ function StoreRow({ listing, isBest }: { listing: StoreListing; isBest: boolean 
           )}
         </div>
 
-        <div className={`px-3 py-1.5 rounded-xl bg-white/[.07] border border-white/15 text-xs font-bold text-white/90 ${theme.btnHover} transition-all flex items-center gap-1.5 shadow-sm`}>
+        <div className={`px-3 py-1.5 rounded-xl bg-white/[0.05] border border-white/[0.1] text-xs font-bold text-white/90 backdrop-blur-md ${theme.btnHover} transition-all flex items-center gap-1.5 shadow-sm`}>
           <span>Go to Store</span>
           <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
         </div>
@@ -183,7 +183,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </div>
 
       {/* ─── Top Bar ─── */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-[#09090b]/90 border-b border-zinc-800">
+      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#09090b]/75 border-b border-white/[0.08]">
         <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             <svg width="28" height="28" viewBox="0 0 48 48">
@@ -222,10 +222,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {/* ─── Left Column ─── */}
           <div className="space-y-6">
             {/* Product Hero */}
-            <div className="rounded-xl bg-[#121215] border border-zinc-800 overflow-hidden p-6 sm:p-8 shadow-md">
+            <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] overflow-hidden p-6 sm:p-8 shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
               <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
                 {/* Image */}
-                <div className="shrink-0 w-full sm:w-56 h-56 rounded-lg bg-zinc-900/40 border border-zinc-800/80 flex items-center justify-center p-4 relative overflow-hidden group">
+                <div className="shrink-0 w-full sm:w-56 h-56 rounded-lg bg-white/[0.02] border border-white/[0.08] flex items-center justify-center p-4 relative overflow-hidden group">
                   {product.image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -307,7 +307,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             {/* Deal Score */}
             {dealScore && (
-              <div className="rounded-xl bg-[#121215] border border-zinc-800 p-6 shadow-md">
+              <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-6 shadow-md">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 text-[10px] font-bold uppercase tracking-wider mb-1.5 font-mono">
@@ -371,7 +371,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   Verified Real Discounts Only
                 </span>
               </div>
-              <div className="rounded-xl bg-[#121215] border border-zinc-800 p-6 shadow-md">
+              <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-6 shadow-md">
                 <PriceHistoryChart listings={listings} />
               </div>
             </div>
@@ -380,9 +380,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {/* ─── Right Sidebar ─── */}
           <div className="space-y-4 lg:sticky lg:top-24 h-fit">
             {/* Price Alert */}
-            <div className="rounded-xl bg-[#121215] border border-zinc-800 p-6 shadow-md">
+            <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-6 shadow-md">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xs">
+                <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xs backdrop-blur-md">
                   ⚡
                 </div>
                 <h3 className="text-sm font-semibold text-zinc-100">
@@ -401,14 +401,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             {/* Specs */}
             {product.specs && Object.keys(product.specs).length > 0 && (
-              <div className="rounded-xl bg-[#121215] border border-zinc-800 p-6 shadow-md">
+              <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-6 shadow-md">
                 <h3 className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-3 flex items-center gap-2">
                   <span>⚙️</span>
                   <span>Specifications</span>
                 </h3>
                 <dl className="space-y-2.5">
                   {Object.entries(product.specs).map(([key, value]) => (
-                    <div key={key} className="flex justify-between items-baseline gap-2 border-b border-zinc-800/60 pb-2">
+                    <div key={key} className="flex justify-between items-baseline gap-2 border-b border-white/[0.06] pb-2">
                       <dt className="text-xs text-zinc-500">{key}</dt>
                       <dd className="text-xs text-zinc-200 font-medium text-right">{value}</dd>
                     </div>
@@ -419,7 +419,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             {/* Highlights */}
             {product.highlights && product.highlights.length > 0 && (
-              <div className="rounded-xl bg-[#121215] border border-zinc-800 p-6 shadow-md">
+              <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-6 shadow-md">
                 <h3 className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-3 flex items-center gap-2">
                   <span>✨</span>
                   <span>Key Highlights</span>
@@ -436,7 +436,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             )}
 
             {/* Product Meta */}
-            <div className="rounded-xl bg-[#121215] border border-zinc-800 p-6 shadow-md">
+            <div className="rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] p-6 shadow-md">
               <h3 className="text-xs font-semibold text-zinc-400 tracking-wider uppercase mb-3 flex items-center gap-2">
                 <span>🛡️</span>
                 <span>Verified Catalog Info</span>

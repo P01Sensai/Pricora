@@ -194,7 +194,7 @@ function SearchResultsContent() {
       </div>
 
       {/* ─── Sticky Clean Search Header ─── */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-[#09090b]/90 border-b border-zinc-800">
+      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#09090b]/75 border-b border-white/[0.08]">
         <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center gap-4">
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             <svg width="28" height="28" viewBox="0 0 48 48">
@@ -266,7 +266,7 @@ function SearchResultsContent() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-[#121215] border border-zinc-800 rounded-xl px-3.5 py-2 text-xs font-semibold text-white outline-none focus:border-zinc-600 transition"
+              className="bg-[#121215]/70 backdrop-blur-md border border-white/[0.08] rounded-xl px-3.5 py-2 text-xs font-semibold text-white outline-none focus:border-white/20 transition"
             >
               <option value="featured" className="bg-[#121215] text-white">✨ Featured Deals</option>
               <option value="discount" className="bg-[#121215] text-white">🔥 Highest Discount</option>
@@ -321,10 +321,10 @@ function SearchResultsContent() {
                   key={product.id}
                   href={`/product/${product.slug}`}
                   prefetch={false}
-                  className="group relative rounded-xl bg-[#121215] border border-zinc-800 hover:border-zinc-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden"
+                  className="group relative rounded-xl bg-[#121215]/60 backdrop-blur-xl border border-white/[0.08] hover:border-white/20 hover:bg-[#18181e]/75 hover:shadow-[0_16px_36px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden"
                 >
                   {/* Top Image area */}
-                  <div className="relative h-52 bg-zinc-900/40 flex items-center justify-center p-5 overflow-hidden border-b border-zinc-800/60">
+                  <div className="relative h-52 bg-white/[0.02] flex items-center justify-center p-5 overflow-hidden border-b border-white/[0.06]">
                     <ProductCardImage
                       src={product.image_url}
                       alt={product.title}
@@ -340,17 +340,17 @@ function SearchResultsContent() {
                     {/* Store icons preview with vibrant store colors */}
                     <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
                       {stores.includes("amazon") && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#ff9900]/10 text-[#ff9900] border border-[#ff9900]/30">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#ff9900]/10 text-[#ff9900] border border-[#ff9900]/30 backdrop-blur-md">
                           Amazon
                         </span>
                       )}
                       {stores.includes("flipkart") && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#2874f0]/10 text-[#60a5fa] border border-[#2874f0]/30">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#2874f0]/10 text-[#60a5fa] border border-[#2874f0]/30 backdrop-blur-md">
                           Flipkart
                         </span>
                       )}
                       {stores.includes("croma") && (
-                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#00b300]/10 text-[#4ade80] border border-[#00b300]/30">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#00b300]/10 text-[#4ade80] border border-[#00b300]/30 backdrop-blur-md">
                           Croma
                         </span>
                       )}
@@ -364,7 +364,7 @@ function SearchResultsContent() {
                         <p className="text-[10px] font-bold tracking-wider text-cyan-400 uppercase">
                           {product.brand?.name ?? "Electronics"} · {product.category?.name ?? "Deals"}
                         </p>
-                        <span className="text-[10px] font-bold text-purple-300 bg-purple-500/15 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
+                        <span className="text-[10px] font-bold text-purple-300 bg-purple-500/15 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0 backdrop-blur-md">
                           <span>✨</span>
                           <span>{["Apple", "Sony", "Samsung", "Asus", "Bose"].includes(product.brand?.name ?? "") ? "95%" : "91%"} AI</span>
                         </span>
@@ -374,7 +374,7 @@ function SearchResultsContent() {
                       </h3>
                     </div>
 
-                    <div className="pt-3 border-t border-zinc-800/80 flex items-end justify-between">
+                    <div className="pt-3 border-t border-white/[0.08] flex items-end justify-between">
                       <div>
                         {lowest?.current_price ? (
                           <>
@@ -388,7 +388,7 @@ function SearchResultsContent() {
                         )}
                       </div>
 
-                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all flex items-center gap-1">
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all flex items-center gap-1 backdrop-blur-md">
                         Compare &rarr;
                       </span>
                     </div>

@@ -118,8 +118,8 @@ export default function SearchBar({
         onSubmit={handleSubmit}
         className={`relative flex items-center w-full transition-all duration-200 overflow-hidden ${
           isHero
-            ? "h-16 md:h-20 bg-[#121215] border border-zinc-700/80 rounded-2xl shadow-xl focus-within:border-zinc-500"
-            : "h-11 bg-[#121215] border border-zinc-800 rounded-xl focus-within:border-zinc-600"
+            ? "h-16 md:h-20 bg-[#121215]/70 backdrop-blur-2xl border border-white/[0.12] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] focus-within:border-white/30 focus-within:bg-[#121215]/85"
+            : "h-11 bg-[#121215]/70 backdrop-blur-xl border border-white/[0.1] rounded-xl focus-within:border-white/25 focus-within:bg-[#121215]/85"
         }`}
       >
         <div className={`text-zinc-400 flex items-center ${isHero ? "pl-6 md:pl-8" : "pl-3.5"}`}>
@@ -168,7 +168,7 @@ export default function SearchBar({
         {isHero && (
           <button
             type="submit"
-            className="h-full px-6 md:px-10 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 text-black font-black text-sm md:text-base hover:brightness-110 transition-all shrink-0 flex items-center gap-2 cursor-pointer"
+            className="h-full px-6 md:px-10 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 text-black font-black text-sm md:text-base hover:brightness-110 transition-all shrink-0 flex items-center gap-2 cursor-pointer shadow-md"
           >
             <span>Search Deals</span>
             <svg className="w-4 h-4 text-black stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,9 +180,9 @@ export default function SearchBar({
 
       {/* ─── Instant Suggestions Dropdown ─── */}
       {isOpen && suggestions.length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-2.5 z-[100] rounded-xl bg-[#121215] border border-zinc-800 shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="absolute left-0 right-0 top-full mt-2.5 z-[100] rounded-xl bg-[#121215]/85 backdrop-blur-2xl border border-white/[0.12] shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
           <div className="p-2">
-            <div className="px-3 py-1.5 flex items-center justify-between text-[11px] font-semibold text-zinc-400 tracking-wider uppercase border-b border-zinc-800">
+            <div className="px-3 py-1.5 flex items-center justify-between text-[11px] font-semibold text-zinc-400 tracking-wider uppercase border-b border-white/[0.08]">
               <span>Instant Suggestions</span>
               {isLoading && <span className="text-cyan-400 animate-pulse">Searching…</span>}
             </div>
