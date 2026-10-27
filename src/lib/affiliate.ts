@@ -6,6 +6,38 @@
 const AMAZON_TAG = process.env.AMAZON_AFFILIATE_TAG || "pricora-21";
 const FLIPKART_AFFID = process.env.FLIPKART_AFFILIATE_ID || "pricora";
 
+const ALLOWED_STORE_DOMAINS = [
+  "amazon.in",
+  "amazon.com",
+  "amzn.to",
+  "amzn.in",
+  "flipkart.com",
+  "dl.flipkart.com",
+  "croma.com",
+  "tatacliq.com",
+  "reliancedigital.in",
+  "vijaysales.com",
+];
+
+/**
+ * Validate that destination URL belongs to a recognized, trusted store domain.
+ * Guards against Open Redirect and URL poisoning vulnerabilities.
+ */
+export function isAllowedStoreUrl(rawUrl: string): boolean {
+  try {
+    const parsed = new URL(rawUrl);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      return false;
+    }
+    const hostname = parsed.hostname.toLowerCase();
+    return ALLOWED_STORE_DOMAINS.some(
+      (domain) => hostname === domain || hostname.endsWith("." + domain)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export function buildAffiliateUrl(originalUrl: string, storeSlug: string): string {
   try {
     const url = new URL(originalUrl);

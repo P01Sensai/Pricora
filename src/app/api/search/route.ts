@@ -3,6 +3,7 @@ import { searchProducts, registerScrapedProduct } from "@/lib/data";
 import { scrapeAllStores } from "../../../../workers/scrapers/engine";
 import { STORES } from "@/lib/catalog-data";
 import type { Product } from "@/lib/types";
+import { cacheGet, cacheSet } from "@/lib/redis";
 
 function generateScrapedHistory(currentPricePaise: number) {
   const history = [];
@@ -22,6 +23,22 @@ function generateScrapedHistory(currentPricePaise: number) {
 
 export async function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams.get("q")?.trim() ?? "";
+  const cacheKey = `api_search:${q.toLowerCase()}`;
+
+  // Check Redis cache first (sub-20ms instant response)
+  if (q.length >= 2) {
+    try {
+      const cached = await cacheGet<{ products: Product[]; count: number; sources: any }>(cacheKey);
+      if (cached && cached.products && cached.products.length > 0) {
+        return NextResponse.json({
+          ...cached,
+          cached: true,
+        });
+      }
+    } catch {
+      // Ignore cache read errors
+    }
+  }
 
   // 1. Fetch matching products from our humongous catalog & database
   const catalogProducts = await searchProducts(q);
@@ -135,12 +152,23 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.json({
+  const responsePayload = {
     products: mergedProducts,
     count: mergedProducts.length,
     sources: {
       catalog: catalogProducts.length,
-      live_scraped: liveProducts.length
+      live_scraped: liveProducts.length,
+    },
+  };
+
+  // Cache in Redis for 10 minutes (600s) if there are results
+  if (mergedProducts.length > 0 && q.length >= 2) {
+    try {
+      await cacheSet(cacheKey, responsePayload, 600);
+    } catch {
+      // Ignore cache write error
     }
-  });
+  }
+
+  return NextResponse.json(responsePayload);
 }

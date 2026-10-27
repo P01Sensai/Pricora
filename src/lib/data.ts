@@ -2,12 +2,22 @@ import { supabase } from "./supabase";
 import type { Product, StoreListing, PriceHistory } from "./types";
 import { HUMONGOUS_CATALOG, STORES } from "./catalog-data";
 
+import { cacheGet, cacheSet } from "./redis";
+
 // In-memory cache for dynamically live-scraped items so they can be viewed on /product/[slug]
 const DYNAMIC_CACHE = new Map<string, Product>();
 
-export function registerScrapedProduct(product: Product) {
+export async function registerScrapedProduct(product: Product) {
   DYNAMIC_CACHE.set(product.slug, product);
   DYNAMIC_CACHE.set(product.id, product);
+
+  // Persist in Redis/distributed cache for 7 days
+  try {
+    await cacheSet(`product:${product.slug}`, product, 86400 * 7);
+    await cacheSet(`product:${product.id}`, product, 86400 * 7);
+  } catch {
+    // Ignore cache persistence errors
+  }
 }
 
 /**
@@ -114,9 +124,20 @@ export function getCatalogProducts(query: string): Product[] {
  * Fetch a single product by slug, including its store listings and price history.
  */
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  // Check dynamic cache first
+  // Check dynamic memory cache first
   if (DYNAMIC_CACHE.has(slug)) {
     return DYNAMIC_CACHE.get(slug)!;
+  }
+
+  // Check persistent distributed cache
+  try {
+    const cachedProduct = await cacheGet<Product>(`product:${slug}`);
+    if (cachedProduct) {
+      DYNAMIC_CACHE.set(slug, cachedProduct);
+      return cachedProduct;
+    }
+  } catch {
+    // Ignore cache error
   }
 
   // Check Supabase

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getListingById, recordClickEvent } from "@/lib/data";
-import { buildAffiliateUrl } from "@/lib/affiliate";
+import { buildAffiliateUrl, isAllowedStoreUrl } from "@/lib/affiliate";
 
 export async function GET(
   request: NextRequest,
@@ -14,18 +14,24 @@ export async function GET(
     return NextResponse.redirect(new URL("/search", request.url), 307);
   }
 
+  // Security: Verify destination URL belongs to an allowed merchant domain
+  if (!isAllowedStoreUrl(listing.url)) {
+    console.warn(`[Security Alert] Blocked suspicious outbound redirect to: ${listing.url}`);
+    return NextResponse.redirect(new URL("/search?error=unauthorized_destination", request.url), 307);
+  }
+
   // Extract user agent and referrer for click tracking
   const userAgent = request.headers.get("user-agent") ?? undefined;
   const referrer = request.headers.get("referer") ?? undefined;
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "anonymous";
 
-  // Record click event non-blockingly
-  await recordClickEvent(listing, { userAgent, referrer, ip });
+  // Non-blocking click event tracking (fire-and-forget to avoid redirect delay)
+  recordClickEvent(listing, { userAgent, referrer, ip }).catch((err) => {
+    console.error("[Affiliate Click Tracking Error]", err);
+  });
 
   // Generate affiliate-tagged destination URL
   const destinationUrl = buildAffiliateUrl(listing.url, listing.store?.slug ?? "");
-
-  console.log(`[Affiliate Click] Redirecting to ${listing.store?.name ?? 'Store'}: ${destinationUrl}`);
 
   return NextResponse.redirect(destinationUrl, 307);
 }

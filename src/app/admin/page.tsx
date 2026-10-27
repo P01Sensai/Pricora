@@ -36,6 +36,14 @@ export default async function AdminDashboardPage() {
           <div className="flex items-center gap-4 text-xs font-semibold">
             <Link href="/" className="text-white/70 hover:text-white transition">← Main Storefront</Link>
             <Link href="/search" className="text-white/70 hover:text-white transition">Search Catalog</Link>
+            <form action="/api/admin/logout" method="POST">
+              <button
+                type="submit"
+                className="px-3 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition text-xs font-medium"
+              >
+                Log Out
+              </button>
+            </form>
           </div>
         </div>
       </header>
