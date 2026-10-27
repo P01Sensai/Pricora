@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ShieldCheck, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
+import { Lock, ArrowRight, AlertCircle, Eye, EyeOff, Shield } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Access denied. Invalid credentials.");
+        setError(data.error || "Authentication failed. Incorrect passkey.");
         setLoading(false);
         return;
       }
@@ -44,109 +44,116 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#060713] text-white font-[Poppins,Inter,system-ui,sans-serif] flex flex-col items-center justify-center p-6 selection:bg-rose-500 selection:text-white overflow-hidden">
-      {/* ─── Ambient Glow Orbs ─── */}
-      <div className="fixed top-1/4 left-1/4 w-[600px] h-[500px] bg-rose-500/[0.14] rounded-full blur-[180px] pointer-events-none" />
-      <div className="fixed bottom-1/4 right-1/4 w-[600px] h-[500px] bg-cyan-500/[0.14] rounded-full blur-[180px] pointer-events-none" />
-
-      {/* ─── Login Card ─── */}
-      <div className="relative z-10 w-full max-w-md">
-        {/* Brand Header */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2.5 mb-3 group">
-            <svg width="34" height="34" viewBox="0 0 48 48">
-              <defs>
-                <linearGradient id="admlg" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#8ef4ff" />
-                  <stop offset="50%" stopColor="#f43f5e" />
-                  <stop offset="100%" stopColor="#fbbf24" />
-                </linearGradient>
-              </defs>
-              <circle cx="24" cy="24" r="7" fill="url(#admlg)" />
-              <circle cx="24" cy="24" r="2.8" fill="#fff" />
-            </svg>
-            <span className="font-black text-2xl tracking-tight bg-gradient-to-r from-cyan-300 via-rose-300 to-amber-300 bg-clip-text text-transparent group-hover:brightness-125 transition">
-              PRICORA
-            </span>
-          </Link>
-          <div className="flex items-center justify-center gap-2 mt-1">
-            <span className="px-3 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-cyan-400/10 text-cyan-300 border border-cyan-400/30">
-              RESTRICTED CONSOLE
-            </span>
+    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-sans flex flex-col justify-between selection:bg-zinc-800 selection:text-zinc-100 antialiased">
+      {/* ─── Top Minimal Header ─── */}
+      <header className="w-full border-b border-zinc-800/60 px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-6 h-6 rounded-md bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-300 group-hover:border-zinc-700 transition-colors">
+            <Shield className="w-3.5 h-3.5 text-zinc-300" />
           </div>
-          <h1 className="text-xl font-bold text-white mt-4 tracking-tight">Admin Authorization</h1>
-          <p className="text-xs text-white/60 mt-1">
-            Authenticate to access live telemetry, matching queues, and store scrapers.
-          </p>
+          <span className="text-xs font-semibold tracking-tight text-zinc-200">
+            Pricora <span className="text-zinc-500 font-normal">/ Admin</span>
+          </span>
+        </Link>
+
+        <div className="flex items-center gap-2 text-xs text-zinc-400">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-[11px] font-mono text-zinc-400">system: active</span>
         </div>
+      </header>
 
-        {/* Form Container */}
-        <div className="p-8 rounded-3xl bg-[#0d0e23]/80 border border-white/[.12] backdrop-blur-2xl shadow-[0_0_50px_rgba(0,245,255,0.08)]">
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-xs font-semibold text-white/70 uppercase tracking-wider mb-2">
-                Console Security Passkey
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
-                  <Lock className="w-4 h-4" />
-                </div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter administrator passkey..."
-                  required
-                  autoFocus
-                  className="w-full pl-10 pr-10 py-3 rounded-xl bg-white/[.05] border border-white/[.12] focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 text-white text-sm placeholder:text-white/30 transition"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-white/40 hover:text-white/80 transition"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            {error && (
-              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading || !password.trim()}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 disabled:opacity-50 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_25px_rgba(0,245,255,0.3)] transition flex items-center justify-center gap-2"
-            >
-              {loading ? (
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                <>
-                  <span>Unlock Admin Dashboard</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
-
-          <div className="mt-6 pt-5 border-t border-white/[.08] text-center">
-            <p className="text-[11px] text-white/40">
-              Default password: <span className="font-mono text-cyan-300">pricora2026</span>
+      {/* ─── Center Login Container ─── */}
+      <main className="flex-1 flex items-center justify-center p-6">
+        <div className="w-full max-w-[360px]">
+          {/* Header */}
+          <div className="mb-6">
+            <h1 className="text-base font-semibold text-zinc-100 tracking-tight">
+              Sign in to Console
+            </h1>
+            <p className="text-xs text-zinc-400 mt-1 leading-normal">
+              Enter your administrative passkey to access live telemetry, scrapers, and pricing pipelines.
             </p>
           </div>
-        </div>
 
-        {/* Back Link */}
-        <div className="text-center mt-6">
-          <Link href="/" className="text-xs text-white/50 hover:text-white transition">
-            ← Return to Pricora Storefront
-          </Link>
+          {/* Form Card */}
+          <div className="bg-[#121215] border border-zinc-800 rounded-xl p-5 shadow-2xl">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-1.5">
+                  Security Passkey
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+                    <Lock className="w-3.5 h-3.5" />
+                  </div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••••••"
+                    required
+                    autoFocus
+                    className="w-full pl-9 pr-9 py-2 rounded-lg bg-zinc-900/80 border border-zinc-800 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 text-zinc-100 text-xs font-mono placeholder:text-zinc-600 transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    tabIndex={-1}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-500 hover:text-zinc-300 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <div className="p-2.5 rounded-lg bg-red-950/30 border border-red-900/50 text-red-400 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                  <span className="text-[11px] leading-tight">{error}</span>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading || !password.trim()}
+                className="w-full py-2 px-3 rounded-lg bg-white hover:bg-zinc-200 disabled:opacity-40 disabled:hover:bg-white text-zinc-950 text-xs font-medium transition-all flex items-center justify-center gap-1.5 shadow-sm"
+              >
+                {loading ? (
+                  <div className="w-3.5 h-3.5 border-2 border-zinc-400 border-t-zinc-950 rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <span>Authenticate</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="mt-4 pt-3.5 border-t border-zinc-800/80 flex items-center justify-between text-[11px] text-zinc-500">
+              <span>Default key:</span>
+              <code className="text-zinc-400 bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800 text-[10px] font-mono">
+                pricora2026
+              </code>
+            </div>
+          </div>
+
+          {/* Return link */}
+          <div className="mt-6 text-center">
+            <Link
+              href="/"
+              className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors inline-flex items-center gap-1"
+            >
+              ← Back to storefront
+            </Link>
+          </div>
         </div>
-      </div>
+      </main>
+
+      {/* ─── Bottom Footer ─── */}
+      <footer className="w-full border-t border-zinc-800/60 px-6 py-3 flex items-center justify-between text-[11px] text-zinc-500">
+        <p>Pricora Multi-Store Intelligence Engine</p>
+        <p className="font-mono">v1.2.0-prod</p>
+      </footer>
     </div>
   );
 }
