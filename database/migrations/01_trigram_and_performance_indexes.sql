@@ -40,7 +40,7 @@ ON price_history(listing_id, recorded_at DESC);
 -- Speeds up price alert evaluation jobs when price drops occur
 CREATE INDEX IF NOT EXISTS idx_alerts_evaluation 
 ON alert_subscribers(product_id, target_price) 
-WHERE is_active = true;
+WHERE status = 'active';
 
 -- Speeds up user alert lookups by email
 CREATE INDEX IF NOT EXISTS idx_alerts_email_lookup 
