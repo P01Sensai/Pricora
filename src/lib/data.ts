@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { supabaseAdmin } from "./supabase-admin";
 import type { Product, StoreListing, PriceHistory } from "./types";
 import { HUMONGOUS_CATALOG, STORES } from "./catalog-data";
 
@@ -307,7 +308,7 @@ export async function recordClickEvent(listing: StoreListing, reqMeta?: { userAg
   if (IN_MEMORY_CLICKS.length > 500) IN_MEMORY_CLICKS.shift();
 
   try {
-    await supabase.from("click_events").insert({
+    await supabaseAdmin.from("click_events").insert({
       listing_id: listing.id,
       session_id: reqMeta?.ip || "anonymous",
       referrer: reqMeta?.referrer,
