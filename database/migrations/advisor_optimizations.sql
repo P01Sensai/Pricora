@@ -24,3 +24,4 @@ ALTER EXTENSION pg_trgm SET SCHEMA extensions;
 -----------------------------------------------------------
 DROP POLICY IF EXISTS "Public insert alert_subscribers" ON alert_subscribers;
 DROP POLICY IF EXISTS "Public insert click_events" ON click_events;
+
